@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 
 import Chat from './components/Chat'
+import BoxScore from './components/BoxScore'
 
 export default class App extends React.Component {
 
@@ -24,15 +25,42 @@ export default class App extends React.Component {
       {content: "Are you even trying?", time: "", sent_by: "Eddy"},
       {content: "Just quit already", time: "", sent_by: "Eddy"},
       {content: "Wow you suck", time: "", sent_by: "Eddy"},
-    ]
+    ],
+    tabs: {
+      page: 'boxscore',
+    },
+    data: {
+      hometeam: [],
+      awayteam: []
+    }
     }
   }
 
+  componentDidMount() {
+    fetch('http://games.espn.com/ffl/api/v2/boxscore?leagueId=1608666&seasonId=2017&teamId=7&scoringPeriodId=8')
+    .then( (res) => res.json())
+    .then( (res) => {
+      let data = {}
+      data['hometeam'] = res['boxscore']['teams'][0]['slots'].map( (player) => [{firstname: player.player.firstName, lastname: player.player.lastName, score: player.currentPeriodRealStats.appliedStatTotal}])
+      data['awayteam'] = res['boxscore']['teams'][1]['slots'].map( (player) => [{firstname: player.player.firstName, lastname: player.player.lastName, score: player.currentPeriodRealStats.appliedStatTotal}])
+      this.setState({data: data})
+    })
+}
+
   render() {
+
+    let page = <Chat messages={this.state.messages}/>
+
+    if (this.state.tabs.page === 'chat') {
+      page = <Chat messages={this.state.messages}/>
+    } else if (this.state.tabs.page === 'boxscore') {
+      page = <BoxScore data={this.state.data}/>
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.pad}></View>
-        <Chat messages={this.state.messages}/>
+        {page}
         <View style={styles.pad}></View>
       </View>
     )
