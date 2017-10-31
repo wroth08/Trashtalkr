@@ -8,7 +8,7 @@ class Chat extends React.Component {
         return (
             <FlatList
             data={this.props.messages}
-            renderItem={({item}) => <Message key={item.content} message={item}></Message>}
+            renderItem={({item}) => <Message key={item.string} message={item}></Message>}
           />
         )
     }

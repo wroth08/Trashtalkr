@@ -5,10 +5,10 @@ class Message extends React.Component {
     render () {
         return (
                 <View className="message" style={styles.messageBody}>
-                    <Text>{this.props.message.sent_by} {this.props.time}</Text>
+                    <Text>{this.props.message.name} {this.props.time}</Text>
                     <View className='messageBody' style={styles.messageBody}>
                         <View className="triangle" style={styles.triangle}></View>
-                        <Text style={styles.messageContent}>{this.props.message.content}</Text>
+                        <Text style={styles.messageContent}>{this.props.message.string}</Text>
                     </View>
                 </View>
         )
@@ -18,7 +18,7 @@ class Message extends React.Component {
 const styles = StyleSheet.create({
     messageContent: {
         fontSize: 20,
-        alignItems: 'center',
+        // alignItems: 'center',
         backgroundColor: 'white',
         marginBottom: 5,
         padding: 5,
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         marginBottom: 10,
         marginTop: 10,
+        justifyContent: 'flex-start'
     },
     triangle: {
         width: 0,
