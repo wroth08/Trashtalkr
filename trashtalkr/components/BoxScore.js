@@ -63,11 +63,13 @@ const styles = StyleSheet.create({
     myteam: {
         flex: 1,
         backgroundColor: 'white',
-        marginBottom: 10
+        marginBottom: 10,
+        justifyContent: 'center'
     },
     yourteam: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        justifyContent: 'center'
     }
   })
 
