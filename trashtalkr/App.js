@@ -41,8 +41,8 @@ export default class App extends React.Component {
     .then( (res) => res.json())
     .then( (res) => {
       let data = {}
-      data['hometeam'] = res['boxscore']['teams'][0]['slots'].map( (player) => [{firstname: player.player.firstName, lastname: player.player.lastName, score: player.currentPeriodRealStats.appliedStatTotal}])
-      data['awayteam'] = res['boxscore']['teams'][1]['slots'].map( (player) => [{firstname: player.player.firstName, lastname: player.player.lastName, score: player.currentPeriodRealStats.appliedStatTotal}])
+      data['hometeam'] = res['boxscore']['teams'][0]['slots'].map( (player) => [{firstname: player.player.firstName, lastname: player.player.lastName, score: player.currentPeriodRealStats.appliedStatTotal, slotCategoryId: player.slotCategoryId}])
+      data['awayteam'] = res['boxscore']['teams'][1]['slots'].map( (player) => [{firstname: player.player.firstName, lastname: player.player.lastName, score: player.currentPeriodRealStats.appliedStatTotal, slotCategoryId: player.slotCategoryId}])
       this.setState({data: data})
     })
 }
