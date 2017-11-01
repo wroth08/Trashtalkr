@@ -14,7 +14,8 @@ import Login from './components/Login'
 
 export default class App extends React.Component {
   constructor() {
-    super();
+    super()
+    this.login = this.login.bind(this)
     this.state = {
       messages: [],
       tabs: {
@@ -25,6 +26,20 @@ export default class App extends React.Component {
         awayteam: []
       }
     };
+  }
+
+  login(username, password) {
+    data = {username: username, password: password}
+    fetch('https://shielded-tor-77262.herokuapp.com/users/login',
+    {method: 'POST', body: JSON.stringify(data), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }})
+    .then( (res) => {
+      if (res.status === 200) {
+        this.setState({tabs: {page: "boxscore"}})
+      }
+    })
   }
 
   componentDidMount() {
@@ -75,7 +90,7 @@ export default class App extends React.Component {
               <Card>
                 <View style={styles.container}>
                   <View style={styles.pad} />
-                  <Chat messages={this.state.messages} />;
+                  <Chat messages={this.state.messages} />
                   <View style={styles.pad} />
                 </View>
               </Card>
@@ -87,7 +102,7 @@ export default class App extends React.Component {
               <Card>
                 <View style={styles.container}>
                   <View style={styles.pad} />
-                  <BoxScore data={this.state.data} />;
+                  <BoxScore data={this.state.data} />
                   <View style={styles.pad} />
                 </View>
               </Card>
@@ -105,7 +120,7 @@ export default class App extends React.Component {
         </Card>
       </ScrollView>
     } else if (this.state.tabs.page === "login") {
-      page = <Login/>
+      page = <Login login={this.login}/>
     }
 
     return (
