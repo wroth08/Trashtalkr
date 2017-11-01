@@ -7,6 +7,7 @@ import Chat from "./components/Chat";
 import BoxScore from "./components/BoxScore";
 import ChatModel from "./components/ChatModel";
 import Home from "./components/Home";
+import Login from './components/Login'
 
 export default class App extends React.Component {
   constructor() {
@@ -14,7 +15,7 @@ export default class App extends React.Component {
     this.state = {
       messages: [],
       tabs: {
-        page: "home"
+        page: "login"
       },
       data: {
         hometeam: [],
@@ -64,26 +65,49 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.tabs.page === "chat") {
-      page = <Chat messages={this.state.messages} />;
+      page =  <ScrollView>
+              <View style={styles.chatButton} />
+              <ChatModel messages={this.state.messages} />
+              <Card>
+                <View style={styles.container}>
+                  <View style={styles.pad} />
+                  <Chat messages={this.state.messages} />;
+                  <View style={styles.pad} />
+                </View>
+              </Card>
+            </ScrollView>
     } else if (this.state.tabs.page === "boxscore") {
-      page = <BoxScore data={this.state.data} />;
+          page =  <ScrollView>
+              <View style={styles.chatButton} />
+              <ChatModel messages={this.state.messages} />
+              <Card>
+                <View style={styles.container}>
+                  <View style={styles.pad} />
+                  <BoxScore data={this.state.data} />;
+                  <View style={styles.pad} />
+                </View>
+              </Card>
+            </ScrollView>
     } else if (this.state.tabs.page === "home") {
-      page = <Home/>;
-    }
-
-    return (
-      <ScrollView>
+      page = <ScrollView>
         <View style={styles.chatButton} />
         <ChatModel messages={this.state.messages} />
-
         <Card>
           <View style={styles.container}>
             <View style={styles.pad} />
-            {page}
+            <Home/>
             <View style={styles.pad} />
           </View>
         </Card>
       </ScrollView>
+    } else if (this.state.tabs.page === "login") {
+      page = <Login/>
+    }
+
+    return (
+      <View>
+        {page}
+      </View>
     );
   }
 }

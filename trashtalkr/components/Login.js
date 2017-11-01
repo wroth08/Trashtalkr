@@ -8,8 +8,10 @@ class Login extends React.Component {
             <View className="login" style={styles.login}>
                 <Text style={styles.header}>Trashtalkr</Text>
                 <View className="form" style={styles.form}>
-                    <TextInput style={styles.input1} autogrow={true}>Username</TextInput>
-                    <TextInput style={styles.input2} autogrow={true}>Password</TextInput>
+                    <Text>Username</Text>
+                    <TextInput style={styles.input1} autogrow={true}></TextInput>
+                    <Text>Password</Text>
+                    <TextInput style={styles.input2} autogrow={true}></TextInput>
                 </View>
                 <Image source={require('../poop.png')} style={styles.image}/>
             </View>
@@ -28,9 +30,11 @@ const styles = StyleSheet.create({
     input1: {
         width: '90%',
         marginBottom: 20,
+        backgroundColor: 'lightgrey'
     },
     input2: {
         width: '90%',
+        backgroundColor: 'lightgrey'
     },
     form: {
         backgroundColor: 'white',
