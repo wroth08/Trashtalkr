@@ -72,14 +72,6 @@ class ChatModel extends React.Component {
                     {this.props.messages.map(message => (
                       <Text key={message.string} style={styles.messageBubble}>
                         {"\n"}
-                        <Icon
-                          name="chat-bubble-outline"
-                          style={{
-                            color: "#1289fe",
-                            textShadowColor: "#d6d7da",
-                            textShadowOffset: { width: 3, height: 2 }
-                          }}
-                        />
                         {"  " + message.name + ": "}
                         {message.string}
                       </Text>

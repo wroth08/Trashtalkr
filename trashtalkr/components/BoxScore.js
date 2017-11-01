@@ -13,7 +13,7 @@ class BoxScore extends React.Component {
   }
 
   render() {
-            let activeHome = this.props.data['hometeam'].filter( (player) => player[0]['slotCategoryId'] !== 20)
+          let activeHome = this.props.data['hometeam'].filter( (player) => player[0]['slotCategoryId'] !== 20)
          let activeAway = this.props.data['awayteam'].filter( (player) => player[0]['slotCategoryId'] !== 20)
          let totalHome = activeHome.reduce( function (sum, current) {
              if (current[0]['score'] !== undefined) {
@@ -26,7 +26,7 @@ class BoxScore extends React.Component {
                  let score = current[0]['score']
                  return sum + score}
              }, 0).toFixed(1)
-         console.log(totalAway)
+        //  console.log(totalAway)
     return (
       <View className="boxscore" style={styles.boxscore}>
         <Text style={styles.titleText}>
