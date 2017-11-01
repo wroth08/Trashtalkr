@@ -33,6 +33,7 @@ class ChatModel extends React.Component {
             animationType="slide"
             transparent={false}
             visible={this.state.modalVisible}
+            onRequestClose={() => console.log('ok')}
           >
             <View
               style={{

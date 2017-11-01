@@ -27,7 +27,6 @@ export default class App extends React.Component {
     fetch("https://shielded-tor-77262.herokuapp.com/conversations/2")
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         let messages = res;
         this.setState({ messages: messages });
       })
