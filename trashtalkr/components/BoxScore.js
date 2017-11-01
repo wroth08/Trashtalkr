@@ -43,7 +43,7 @@ class BoxScore extends React.Component {
         <View className="yourteam" style={styles.yourteam}>
           {this.props.data["awayteam"].map(player => (
             <BoxScoreRow
-              key={player[0]["lastname"]}
+              key={player[0]["lastname"]+player[0]['firstname']}
               firstname={player[0]["firstname"]}
               lastname={player[0]["lastname"]}
               score={player[0]["score"]}
