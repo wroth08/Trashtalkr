@@ -70,7 +70,7 @@ export default class SignUp extends Component {
             >
               Information
             </Text>
-          </View>git add
+          </View>
           <Form
             ref={c => (this._form = c)} // assign a ref
             type={User}
