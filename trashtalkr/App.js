@@ -21,7 +21,7 @@ export default class App extends React.Component {
       messages: [],
       userData: {league_id: 0, team_id: 0},
       tabs: {
-        page: "login"
+        page: "home"
       },
       data: {
         hometeam: [],
@@ -156,18 +156,13 @@ export default class App extends React.Component {
     } else if (this.state.tabs.page === "home") {
       page = (
         <View>
-          <ScrollView>
-            <View style={styles.chatButton} />
-            <ChatModel messages={this.state.messages} />
-            <Card>
-              <View style={styles.container}>
+          <ScrollView style={styles.homepage}>
+              <View style={styles.homeCont}>
                 <View style={styles.pad} />
                 <Home />
                 <View style={styles.pad} />
               </View>
-            </Card>
           </ScrollView>
-          <MaterialNavTabs changeTabs={this.changeTabs} />
         </View>
       );
     } else if (this.state.tabs.page === "login") {
