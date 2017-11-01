@@ -6,6 +6,8 @@ import ToolbarComponent from "react-native-toolbar-component";
 import Chat from "./components/Chat";
 import BoxScore from "./components/BoxScore";
 import ChatModel from "./components/ChatModel";
+// import PageTabs from "./components/PageTabs";
+import MaterialNavTabs from "./components/MaterialNavTabs";
 
 export default class App extends React.Component {
   constructor() {
@@ -66,18 +68,22 @@ export default class App extends React.Component {
     let page = <BoxScore data={this.state.data} />;
 
     return (
-      <ScrollView>
-        <View style={styles.chatButton} />
-        <ChatModel messages={this.state.messages} />
+      <View>
+        <ScrollView>
+          <View style={styles.chatButton} />
 
-        <Card>
-          <View style={styles.container}>
-            <View style={styles.pad} />
-            {page}
-            <View style={styles.pad} />
-          </View>
-        </Card>
-      </ScrollView>
+          <ChatModel messages={this.state.messages} />
+
+          <Card>
+            <View style={styles.container}>
+              <View style={styles.pad} />
+              {page}
+              <View style={styles.pad} />
+            </View>
+          </Card>
+        </ScrollView>
+        <MaterialNavTabs />
+      </View>
     );
   }
 }
