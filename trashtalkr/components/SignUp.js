@@ -13,16 +13,16 @@ import t from "tcomb-form-native"; // 0.6.9
 const Form = t.form.Form;
 
 const User = t.struct({
-  Email: t.String,
+  Username: t.String,
   Name: t.String,
   League: t.String,
-  password: t.String,
+  Password: t.String,
   terms: t.Boolean
 });
 
 const options = {
   fields: {
-    email: {
+    Username: {
       error:
         "Without an email address how are you going to reset your password when you forget it?"
     },
