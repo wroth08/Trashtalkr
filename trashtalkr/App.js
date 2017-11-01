@@ -14,7 +14,7 @@ export default class App extends React.Component {
     this.state = {
       messages: [],
       tabs: {
-        page: "boxscore"
+        page: "home"
       },
       data: {
         hometeam: [],
