@@ -16,7 +16,10 @@ class MaterialNavTabs extends Component {
           bottom: 0,
           right: 0
         }}
-        onTabChange={newTabIndex => alert(`New Tab at position ${newTabIndex}`)}
+        activeTab={1}
+        onTabChange={newTabIndex => {
+          this.props.changeTabs(newTabIndex);
+        }}
       >
         <Tab
           barBackgroundColor="#37474F"

@@ -6,15 +6,15 @@ import ToolbarComponent from "react-native-toolbar-component";
 import Chat from "./components/Chat";
 import BoxScore from "./components/BoxScore";
 import ChatModel from "./components/ChatModel";
-// import PageTabs from "./components/PageTabs";
+import SignUp from "./components/SignUp";
 import MaterialNavTabs from "./components/MaterialNavTabs";
 import Home from "./components/Home";
-import Login from './components/Login'
-
+import Login from "./components/Login";
 
 export default class App extends React.Component {
   constructor() {
     super();
+    this.changeTabs = this.changeTabs.bind(this);
     this.state = {
       messages: [],
       tabs: {
@@ -25,6 +25,18 @@ export default class App extends React.Component {
         awayteam: []
       }
     };
+  }
+
+  changeTabs(index) {
+    if (index === 0) {
+      this.setState({ tabs: { page: "home" } });
+    } else if (index === 1) {
+      this.setState({ tabs: { page: "boxscore" } });
+    } else if (index === 2) {
+      this.setState({ tabs: { page: "scores" } });
+    } else if (index === 3) {
+      this.setState({ tabs: { page: "players" } });
+    }
   }
 
   componentDidMount() {
@@ -67,52 +79,62 @@ export default class App extends React.Component {
   }
 
   render() {
-
     if (this.state.tabs.page === "chat") {
-      page =  <ScrollView>
-              <View style={styles.chatButton} />
-              <ChatModel messages={this.state.messages} />
-              <Card>
-                <View style={styles.container}>
-                  <View style={styles.pad} />
-                  <Chat messages={this.state.messages} />;
-                  <View style={styles.pad} />
-                </View>
-              </Card>
-            </ScrollView>
+      page = (
+        <View>
+          <ScrollView>
+            <View style={styles.chatButton} />
+            <ChatModel messages={this.state.messages} />
+            <Card>
+              <View style={styles.container}>
+                <View style={styles.pad} />
+                <Chat messages={this.state.messages} />;
+                <View style={styles.pad} />
+              </View>
+            </Card>
+          </ScrollView>
+          <MaterialNavTabs changeTabs={this.changeTabs} />
+        </View>
+      );
     } else if (this.state.tabs.page === "boxscore") {
-          page =  <ScrollView>
-              <View style={styles.chatButton} />
-              <ChatModel messages={this.state.messages} />
-              <Card>
-                <View style={styles.container}>
-                  <View style={styles.pad} />
-                  <BoxScore data={this.state.data} />;
-                  <View style={styles.pad} />
-                </View>
-              </Card>
-            </ScrollView>
+      page = (
+        <View>
+          <ScrollView>
+            <View style={styles.chatButton} />
+            <ChatModel messages={this.state.messages} />
+            <Card>
+              <View style={styles.container}>
+                <View style={styles.pad} />
+                <BoxScore data={this.state.data} />
+                <View style={styles.pad} />
+              </View>
+            </Card>
+          </ScrollView>
+          <MaterialNavTabs changeTabs={this.changeTabs} />
+        </View>
+      );
     } else if (this.state.tabs.page === "home") {
-      page = <ScrollView>
-        <View style={styles.chatButton} />
-        <ChatModel messages={this.state.messages} />
-        <Card>
-          <View style={styles.container}>
-            <View style={styles.pad} />
-            <Home/>
-            <View style={styles.pad} />
-          </View>
-        </Card>
-      </ScrollView>
+      page = (
+        <View>
+          <ScrollView>
+            <View style={styles.chatButton} />
+            <ChatModel messages={this.state.messages} />
+            <Card>
+              <View style={styles.container}>
+                <View style={styles.pad} />
+                <Home />
+                <View style={styles.pad} />
+              </View>
+            </Card>
+          </ScrollView>
+          <MaterialNavTabs changeTabs={this.changeTabs} />
+        </View>
+      );
     } else if (this.state.tabs.page === "login") {
-      page = <Login/>
+      page = <SignUp />;
     }
 
-    return (
-      <View>
-        {page}
-      </View>
-    );
+    return <View>{page}</View>;
   }
 }
 
