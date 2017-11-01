@@ -16,8 +16,10 @@ export default class App extends React.Component {
   constructor() {
     super()
     this.login = this.login.bind(this)
+    this.show = this.show.bind(this)
     this.state = {
       messages: [],
+      userData: {league_id: 0, team_id: 0},
       tabs: {
         page: "login"
       },
@@ -37,48 +39,70 @@ export default class App extends React.Component {
     }})
     .then( (res) => {
       if (res.status === 200) {
-        this.setState({tabs: {page: "boxscore"}})
+        res = res.json()
+        .then( (res) => {
+          this.setState({userData: {league_id: res[0].league_id, team_id: res[0].team_id}})
+          this.setState({tabs: {page: "boxscore"}})
+          this.show(this.state.userData.league_id, this.state.userData.team_id)
+        })
       }
     })
   }
 
   componentDidMount() {
+  }
+
+  
+
+  show(league, team) {
     fetch("https://shielded-tor-77262.herokuapp.com/conversations/2")
-      .then(res => res.json())
-      .then(res => {
-        let messages = res;
-        this.setState({ messages: messages });
-      })
-      .then(() => {
-        fetch(
-          "http://games.espn.com/ffl/api/v2/boxscore?leagueId=1608666&seasonId=2017&teamId=7&scoringPeriodId=8"
-        )
-          .then(res => res.json())
-          .then(res => {
-            let data = {};
-            data["hometeam"] = res["boxscore"]["teams"][0][
-              "slots"
-            ].map(player => [
-              {
-                firstname: player.player.firstName,
-                lastname: player.player.lastName,
-                score: player.currentPeriodRealStats.appliedStatTotal,
-                slotCategoryId: player.slotCategoryId
-              }
-            ]);
-            data["awayteam"] = res["boxscore"]["teams"][1][
-              "slots"
-            ].map(player => [
-              {
-                firstname: player.player.firstName,
-                lastname: player.player.lastName,
-                score: player.currentPeriodRealStats.appliedStatTotal,
-                slotCategoryId: player.slotCategoryId
-              }
-            ]);
-            this.setState({ data: data });
-          });
-      });
+    .then(res => res.json())
+    .then(res => {
+      let messages = res;
+      this.setState({ messages: messages });
+    })
+    .then(() => {
+      console.log(`http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`)
+      fetch(
+        `http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`
+      )
+        .then(res => res.json())
+        .then(res => {
+          let data = {}
+          data["hometeam"] = res["boxscore"]["teams"][0][
+            "slots"
+          ].map(player => [
+            {
+              firstname: player.player.firstName,
+              lastname: player.player.lastName,
+              score: player.currentPeriodRealStats.appliedStatTotal,
+              slotCategoryId: player.slotCategoryId
+            }
+          ]);
+          data["awayteam"] = res["boxscore"]["teams"][1][
+            "slots"
+          ].map(player => [
+            {
+              firstname: player.player.firstName,
+              lastname: player.player.lastName,
+              score: player.currentPeriodRealStats.appliedStatTotal,
+              slotCategoryId: player.slotCategoryId
+            }
+          ])
+          data['awayteam'].map( player => {
+            if (player[0].score === undefined) {
+              player[0].score = 0
+            }
+          })
+          data['hometeam'].map( player => {
+            if (player[0].score === undefined) {
+              player[0].score = 0
+            }
+          })
+          console.log(data['awayteam'])
+          this.setState({ data: data });
+        });
+    });
   }
 
   render() {
