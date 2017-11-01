@@ -8,6 +8,9 @@ import BoxScore from "./components/BoxScore";
 import ChatModel from "./components/ChatModel";
 // import PageTabs from "./components/PageTabs";
 import MaterialNavTabs from "./components/MaterialNavTabs";
+import Home from "./components/Home";
+import Login from './components/Login'
+
 
 export default class App extends React.Component {
   constructor() {
@@ -15,7 +18,7 @@ export default class App extends React.Component {
     this.state = {
       messages: [],
       tabs: {
-        page: "data"
+        page: "login"
       },
       data: {
         hometeam: [],
@@ -28,7 +31,6 @@ export default class App extends React.Component {
     fetch("https://shielded-tor-77262.herokuapp.com/conversations/2")
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         let messages = res;
         this.setState({ messages: messages });
       })
@@ -65,24 +67,50 @@ export default class App extends React.Component {
   }
 
   render() {
-    let page = <BoxScore data={this.state.data} />;
+
+    if (this.state.tabs.page === "chat") {
+      page =  <ScrollView>
+              <View style={styles.chatButton} />
+              <ChatModel messages={this.state.messages} />
+              <Card>
+                <View style={styles.container}>
+                  <View style={styles.pad} />
+                  <Chat messages={this.state.messages} />;
+                  <View style={styles.pad} />
+                </View>
+              </Card>
+            </ScrollView>
+    } else if (this.state.tabs.page === "boxscore") {
+          page =  <ScrollView>
+              <View style={styles.chatButton} />
+              <ChatModel messages={this.state.messages} />
+              <Card>
+                <View style={styles.container}>
+                  <View style={styles.pad} />
+                  <BoxScore data={this.state.data} />;
+                  <View style={styles.pad} />
+                </View>
+              </Card>
+            </ScrollView>
+    } else if (this.state.tabs.page === "home") {
+      page = <ScrollView>
+        <View style={styles.chatButton} />
+        <ChatModel messages={this.state.messages} />
+        <Card>
+          <View style={styles.container}>
+            <View style={styles.pad} />
+            <Home/>
+            <View style={styles.pad} />
+          </View>
+        </Card>
+      </ScrollView>
+    } else if (this.state.tabs.page === "login") {
+      page = <Login/>
+    }
 
     return (
       <View>
-        <ScrollView>
-          <View style={styles.chatButton} />
-
-          <ChatModel messages={this.state.messages} />
-
-          <Card>
-            <View style={styles.container}>
-              <View style={styles.pad} />
-              {page}
-              <View style={styles.pad} />
-            </View>
-          </Card>
-        </ScrollView>
-        <MaterialNavTabs />
+        {page}
       </View>
     );
   }

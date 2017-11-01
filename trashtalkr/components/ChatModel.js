@@ -33,6 +33,7 @@ class ChatModel extends React.Component {
             animationType="slide"
             transparent={false}
             visible={this.state.modalVisible}
+            onRequestClose={() => console.log('ok')}
           >
             <View
               style={{
@@ -69,7 +70,7 @@ class ChatModel extends React.Component {
                 <View style={styles.body}>
                   <View style={styles.messageBubbleLeft}>
                     {this.props.messages.map(message => (
-                      <Text style={styles.messageBubble}>
+                      <Text key={message.string} style={styles.messageBubble}>
                         {"\n"}
                         <Icon
                           name="chat-bubble-outline"
