@@ -14,7 +14,7 @@ export default class App extends React.Component {
     this.state = {
       messages: [],
       tabs: {
-        page: "home"
+        page: "boxscore"
       },
       data: {
         hometeam: [],
@@ -69,8 +69,6 @@ export default class App extends React.Component {
       page = <BoxScore data={this.state.data} />;
     } else if (this.state.tabs.page === "home") {
       page = <Home/>;
-    } else if (this.state.tabs.page === "data") {
-      page = <BoxScore data={this.state.data} />;
     }
 
     return (
