@@ -7,8 +7,8 @@ class BoxScore extends React.Component {
   constructor() {
     super();
     this.state = {
-      yourTeam: "Your Shitty Team",
-      theirTeam: "Their Shitty Team"
+      yourTeam: "Your Team",
+      theirTeam: "Their Team"
     };
   }
 
@@ -50,6 +50,7 @@ class BoxScore extends React.Component {
         </View>
 
         <Text style={styles.titleText}>
+          {"\n"}
           {this.state.theirTeam}
           {"\n"}
           {"\n"}

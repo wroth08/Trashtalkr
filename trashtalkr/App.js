@@ -6,8 +6,11 @@ import ToolbarComponent from "react-native-toolbar-component";
 import Chat from "./components/Chat";
 import BoxScore from "./components/BoxScore";
 import ChatModel from "./components/ChatModel";
+// import PageTabs from "./components/PageTabs";
+import MaterialNavTabs from "./components/MaterialNavTabs";
 import Home from "./components/Home";
 import Login from './components/Login'
+
 
 export default class App extends React.Component {
   constructor() {
@@ -64,6 +67,7 @@ export default class App extends React.Component {
   }
 
   render() {
+
     if (this.state.tabs.page === "chat") {
       page =  <ScrollView>
               <View style={styles.chatButton} />

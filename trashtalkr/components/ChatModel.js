@@ -63,7 +63,7 @@ class ChatModel extends React.Component {
                       fontSize: 15
                     }}
                   >
-                    Back to your shitty team
+                    Back to your team
                   </Text>
                 </TouchableHighlight>
 
