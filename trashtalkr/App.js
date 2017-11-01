@@ -21,7 +21,7 @@ export default class App extends React.Component {
       messages: [],
       userData: {league_id: 0, team_id: 0},
       tabs: {
-        page: "home"
+        page: "login"
       },
       data: {
         hometeam: [],
@@ -40,6 +40,7 @@ export default class App extends React.Component {
     } else if (index === 3) {
       this.setState({ tabs: { page: "players" } });
     }
+  }
     
   login(username, password) {
     data = {username: username, password: password}
@@ -170,9 +171,11 @@ export default class App extends React.Component {
         </View>
       );
     } else if (this.state.tabs.page === "login") {
-      page = <SignUp />;
-
+      page = <Login login={this.login}/>
+    } else if (this.state.tabs.page === "signup") {
+      page = <SignUp/>
     }
+
 
     return <View>{page}</View>;
   }
