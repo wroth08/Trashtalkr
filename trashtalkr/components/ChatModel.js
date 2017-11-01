@@ -69,7 +69,7 @@ class ChatModel extends React.Component {
                 <View style={styles.body}>
                   <View style={styles.messageBubbleLeft}>
                     {this.props.messages.map(message => (
-                      <Text style={styles.messageBubble}>
+                      <Text key={message.string} style={styles.messageBubble}>
                         {"\n"}
                         <Icon
                           name="chat-bubble-outline"

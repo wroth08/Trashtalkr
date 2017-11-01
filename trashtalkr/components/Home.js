@@ -9,7 +9,7 @@ class Home extends React.Component {
 
     render () {
         return (
-          <View style={{flexDirection: 'column', justifyContent: 'center', flex: 1, width: '95%', backgroundColor: 'aqua'}}>
+          <View style={{flexDirection: 'column', justifyContent: 'center', flex: 1, width: '95%'}}>
             <View style={{justifyContent:'center', alignItems:'center', backgroundColor: 'blue', flex: 1, height: 110}}>
               <Text style={{fontWeight: 'bold', color: '#F5F5F5'}}>Weekly Matchup</Text>
             </View>

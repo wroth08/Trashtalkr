@@ -13,6 +13,20 @@ class BoxScore extends React.Component {
   }
 
   render() {
+            let activeHome = this.props.data['hometeam'].filter( (player) => player[0]['slotCategoryId'] !== 20)
+         let activeAway = this.props.data['awayteam'].filter( (player) => player[0]['slotCategoryId'] !== 20)
+         let totalHome = activeHome.reduce( function (sum, current) {
+             if (current[0]['score'] !== undefined) {
+                 let score = current[0]['score']
+                 return sum + score}
+             }, 0).toFixed(1)
+         console.log(totalHome)
+         let totalAway = activeAway.reduce( function (sum, current) {
+             if (current[0]['score'] !== undefined) {
+                 let score = current[0]['score']
+                 return sum + score}
+             }, 0).toFixed(1)
+         console.log(totalAway)
     return (
       <View className="boxscore" style={styles.boxscore}>
         <Text style={styles.titleText}>
@@ -31,6 +45,8 @@ class BoxScore extends React.Component {
               score={player[0]["score"]}
             />
           ))}
+          <BoxScoreRow />
+          <BoxScoreRow firstname="Total: " score={totalHome}/>
         </View>
 
         <Text style={styles.titleText}>
@@ -43,12 +59,14 @@ class BoxScore extends React.Component {
         <View className="yourteam" style={styles.yourteam}>
           {this.props.data["awayteam"].map(player => (
             <BoxScoreRow
-              key={player[0]["lastname"]}
+              key={player[0]['firstname'] + player[0]["lastname"]}
               firstname={player[0]["firstname"]}
               lastname={player[0]["lastname"]}
               score={player[0]["score"]}
             />
           ))}
+          <BoxScoreRow />
+          <BoxScoreRow firstname="Total: " score={totalAway}/>
         </View>
       </View>
     );
