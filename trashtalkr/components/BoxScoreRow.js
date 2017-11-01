@@ -8,7 +8,7 @@ class BoxScoreRow extends React.Component {
         <Text>
           {this.props.firstname} {this.props.lastname}
         </Text>
-        <Text>{this.props.score}</Text>
+        <Text style={{fontWeight: 'bold'}}>{this.props.score}</Text>
       </View>
     );
   }
