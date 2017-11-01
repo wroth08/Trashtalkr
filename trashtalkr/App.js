@@ -19,7 +19,7 @@ export default class App extends React.Component {
     this.state = {
       messages: [],
       tabs: {
-        page: "login"
+        page: "home"
       },
       data: {
         hometeam: [],
@@ -108,16 +108,12 @@ export default class App extends React.Component {
               </Card>
             </ScrollView>
     } else if (this.state.tabs.page === "home") {
-      page = <ScrollView>
-        <View style={styles.chatButton} />
-        <ChatModel messages={this.state.messages} />
-        <Card>
-          <View style={styles.container}>
+      page = <ScrollView style={styles.homepage}>
+          <View style={styles.homeCont}>
             <View style={styles.pad} />
             <Home/>
             <View style={styles.pad} />
           </View>
-        </Card>
       </ScrollView>
     } else if (this.state.tabs.page === "login") {
       page = <Login login={this.login}/>
@@ -143,5 +139,13 @@ const styles = StyleSheet.create({
     alignContent: "center",
     height: 50,
     flexDirection: "row"
+  },
+  homeCont: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 30
+  },
+  homepage: {
+    backgroundColor: 'aqua'
   }
 });
