@@ -21,7 +21,7 @@ export default class App extends React.Component {
       messages: [],
       userData: {league_id: 0, team_id: 0},
       tabs: {
-        page: "home"
+        page: "login"
       },
       data: {
         hometeam: [],
