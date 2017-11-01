@@ -20,6 +20,7 @@ class BoxScore extends React.Component {
           {"\n"}
           {"\n"}
         </Text>
+        <Text style={styles.baseText}> Players </Text>
 
         <View className="myteam" style={styles.myteam}>
           {this.props.data["hometeam"].map(player => (
@@ -37,6 +38,8 @@ class BoxScore extends React.Component {
           {"\n"}
           {"\n"}
         </Text>
+        <Text style={styles.baseText}> Players </Text>
+
         <View className="yourteam" style={styles.yourteam}>
           {this.props.data["awayteam"].map(player => (
             <BoxScoreRow
@@ -67,7 +70,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white"
   },
   baseText: {
-    fontFamily: "Cochin"
+    marginLeft: 10,
+    textDecorationLine: "underline",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10
   },
   titleText: {
     textAlign: "center",
@@ -75,6 +82,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
-
 
 export default BoxScore;
