@@ -15,10 +15,11 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.changeTabs = this.changeTabs.bind(this);
+    this.login = this.login.bind(this)
     this.state = {
       messages: [],
       tabs: {
-        page: "login"
+        page: "home"
       },
       data: {
         hometeam: [],
@@ -37,6 +38,19 @@ export default class App extends React.Component {
     } else if (index === 3) {
       this.setState({ tabs: { page: "players" } });
     }
+    
+  login(username, password) {
+    data = {username: username, password: password}
+    fetch('https://shielded-tor-77262.herokuapp.com/users/login',
+    {method: 'POST', body: JSON.stringify(data), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }})
+    .then( (res) => {
+      if (res.status === 200) {
+        this.setState({tabs: {page: "boxscore"}})
+      }
+    })
   }
 
   componentDidMount() {
@@ -80,6 +94,7 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.tabs.page === "chat") {
+
       page = (
         <View>
           <ScrollView>
@@ -132,6 +147,7 @@ export default class App extends React.Component {
       );
     } else if (this.state.tabs.page === "login") {
       page = <SignUp />;
+
     }
 
     return <View>{page}</View>;
@@ -150,5 +166,13 @@ const styles = StyleSheet.create({
     alignContent: "center",
     height: 50,
     flexDirection: "row"
+  },
+  homeCont: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 30
+  },
+  homepage: {
+    backgroundColor: 'aqua'
   }
 });
