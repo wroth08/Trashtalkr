@@ -28,6 +28,7 @@
     "react-native-material-design": "^0.3.7",
     "react-native-tabs": "^1.0.9",
     "react-native-toolbar-component": "^0.0.1",
-    "react-native-vector-icons": "^4.4.2"
+    "react-native-vector-icons": "^4.4.2",
+    "tcomb-form-native": "^0.6.11"
   }
 }
