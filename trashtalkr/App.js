@@ -1,13 +1,15 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import React from "react";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { Card } from "react-native-material-design";
+import ToolbarComponent from "react-native-toolbar-component";
 
-import Chat from './components/Chat'
-import BoxScore from './components/BoxScore'
+import Chat from "./components/Chat";
+import BoxScore from "./components/BoxScore";
+import ChatModel from "./components/ChatModel";
 
 export default class App extends React.Component {
-
   constructor() {
-    super()
+    super();
     this.state = {
       messages: [
       // {content: "You suck", time: "", sent_by: "Eddy"},
@@ -55,32 +57,42 @@ export default class App extends React.Component {
 }
 
   render() {
+    let page = <Chat messages={this.state.data} />;
 
-    let page = <Chat messages={this.state.messages}/>
-
-    if (this.state.tabs.page === 'chat') {
-      page = <Chat messages={this.state.messages}/>
-    } else if (this.state.tabs.page === 'boxscore') {
-      page = <BoxScore data={this.state.data}/>
+    if (this.state.tabs.page === "chat") {
+      page = <Chat messages={this.state.messages} />;
+    } else if (this.state.tabs.page === "boxscore") {
+      page = <BoxScore data={this.state.data} />;
     }
 
     return (
-      <View style={styles.container}>
-        <View style={styles.pad}></View>
-        {page}
-        <View style={styles.pad}></View>
-      </View>
-    )
+      <ScrollView>
+        <View style={styles.chatButton} />
+        <ChatModel messages={this.state.messages} />
+
+        <Card>
+          <View style={styles.container}>
+            <View style={styles.pad} />
+            {page}
+            <View style={styles.pad} />
+          </View>
+        </Card>
+      </ScrollView>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'aqua'
+    alignItems: "center"
   },
   pad: {
     height: 50
+  },
+  chatButton: {
+    alignContent: "center",
+    height: 50,
+    flexDirection: "row"
   }
-})
+});
