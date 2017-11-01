@@ -6,6 +6,7 @@ import ToolbarComponent from "react-native-toolbar-component";
 import Chat from "./components/Chat";
 import BoxScore from "./components/BoxScore";
 import ChatModel from "./components/ChatModel";
+import Home from "./components/Home";
 
 export default class App extends React.Component {
   constructor() {
@@ -13,7 +14,7 @@ export default class App extends React.Component {
     this.state = {
       messages: [],
       tabs: {
-        page: "data"
+        page: "home"
       },
       data: {
         hometeam: [],
@@ -62,7 +63,15 @@ export default class App extends React.Component {
   }
 
   render() {
-    let page = <BoxScore data={this.state.data} />;
+    if (this.state.tabs.page === "chat") {
+      page = <Chat messages={this.state.messages} />;
+    } else if (this.state.tabs.page === "boxscore") {
+      page = <BoxScore data={this.state.data} />;
+    } else if (this.state.tabs.page === "home") {
+      page = <Home/>;
+    } else if (this.state.tabs.page === "data") {
+      page = <BoxScore data={this.state.data} />;
+    }
 
     return (
       <ScrollView>
