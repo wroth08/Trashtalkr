@@ -15,11 +15,12 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.changeTabs = this.changeTabs.bind(this);
-    this.login = this.login.bind(this)
-    this.show = this.show.bind(this)
+    this.login = this.login.bind(this);
+    this.show = this.show.bind(this);
+    this.signUpPage = this.signUpPage.bind(this);
     this.state = {
       messages: [],
-      userData: {league_id: 0, team_id: 0},
+      userData: { league_id: 0, team_id: 0 },
       tabs: {
         page: "login"
       },
@@ -41,85 +42,90 @@ export default class App extends React.Component {
       this.setState({ tabs: { page: "players" } });
     }
   }
-    
+
+  signUpPage() {
+    this.setState({ tabs: { page: "signup" } });
+  }
+
   login(username, password) {
-    data = {username: username, password: password}
-    fetch('https://shielded-tor-77262.herokuapp.com/users/login',
-    {method: 'POST', body: JSON.stringify(data), headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    }})
-    .then( (res) => {
-      if (res.status === 200) {
-        res = res.json()
-        .then( (res) => {
-          this.setState({userData: {league_id: res[0].league_id, team_id: res[0].team_id}})
-          this.setState({tabs: {page: "boxscore"}})
-          this.show(this.state.userData.league_id, this.state.userData.team_id)
-        })
+    data = { username: username, password: password };
+    fetch("https://shielded-tor-77262.herokuapp.com/users/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
       }
-    })
+    }).then(res => {
+      if (res.status === 200) {
+        res = res.json().then(res => {
+          this.setState({
+            userData: { league_id: res[0].league_id, team_id: res[0].team_id }
+          });
+          this.setState({ tabs: { page: "boxscore" } });
+          this.show(this.state.userData.league_id, this.state.userData.team_id);
+        });
+      }
+    });
   }
 
-  componentDidMount() {
-  }
-
-  
+  componentDidMount() {}
 
   show(league, team) {
     fetch("https://shielded-tor-77262.herokuapp.com/conversations/2")
-    .then(res => res.json())
-    .then(res => {
-      let messages = res;
-      this.setState({ messages: messages });
-    })
-    .then(() => {
-      console.log(`http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`)
-      fetch(
-        `http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`
-      )
-        .then(res => res.json())
-        .then(res => {
-          let data = {}
-          data["hometeam"] = res["boxscore"]["teams"][0][
-            "slots"
-          ].map(player => [
-            {
-              firstname: player.player.firstName,
-              lastname: player.player.lastName,
-              score: player.currentPeriodRealStats.appliedStatTotal,
-              slotCategoryId: player.slotCategoryId
-            }
-          ]);
-          data["awayteam"] = res["boxscore"]["teams"][1][
-            "slots"
-          ].map(player => [
-            {
-              firstname: player.player.firstName,
-              lastname: player.player.lastName,
-              score: player.currentPeriodRealStats.appliedStatTotal,
-              slotCategoryId: player.slotCategoryId
-            }
-          ])
-          data['awayteam'].map( player => {
-            if (player[0].score === undefined) {
-              player[0].score = 0
-            }
-          })
-          data['hometeam'].map( player => {
-            if (player[0].score === undefined) {
-              player[0].score = 0
-            }
-          })
-          console.log(data['awayteam'])
-          this.setState({ data: data });
-        });
-    });
+      .then(res => res.json())
+      .then(res => {
+        let messages = res;
+        this.setState({ messages: messages });
+      })
+      .then(() => {
+        console.log(
+          `http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`
+        );
+        fetch(
+          `http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`
+        )
+          .then(res => res.json())
+          .then(res => {
+            let data = {};
+            data["hometeam"] = res["boxscore"]["teams"][0][
+              "slots"
+            ].map(player => [
+              {
+                firstname: player.player.firstName,
+                lastname: player.player.lastName,
+                score: player.currentPeriodRealStats.appliedStatTotal,
+                slotCategoryId: player.slotCategoryId
+              }
+            ]);
+            data["awayteam"] = res["boxscore"]["teams"][1][
+              "slots"
+            ].map(player => [
+              {
+                firstname: player.player.firstName,
+                lastname: player.player.lastName,
+                score: player.currentPeriodRealStats.appliedStatTotal,
+                slotCategoryId: player.slotCategoryId
+              }
+            ]);
+            data["awayteam"].map(player => {
+              if (player[0].score === undefined) {
+                player[0].score = 0;
+              }
+            });
+            data["hometeam"].map(player => {
+              if (player[0].score === undefined) {
+                player[0].score = 0;
+              }
+            });
+            console.log(data["awayteam"]);
+            this.setState({ data: data });
+          });
+      });
   }
 
   render() {
     if (this.state.tabs.page === "chat") {
-
       page = (
         <View>
           <ScrollView>
@@ -157,20 +163,19 @@ export default class App extends React.Component {
       page = (
         <View>
           <ScrollView style={styles.homepage}>
-              <View style={styles.homeCont}>
-                <View style={styles.pad} />
-                <Home />
-                <View style={styles.pad} />
-              </View>
+            <View style={styles.homeCont}>
+              <View style={styles.pad} />
+              <Home />
+              <View style={styles.pad} />
+            </View>
           </ScrollView>
         </View>
       );
     } else if (this.state.tabs.page === "login") {
-      page = <Login login={this.login}/>
+      page = <Login login={this.login} signUpPage={this.signUpPage} />;
     } else if (this.state.tabs.page === "signup") {
-      page = <SignUp/>
+      page = <SignUp />;
     }
-
 
     return <View>{page}</View>;
   }
@@ -195,6 +200,6 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   homepage: {
-    backgroundColor: 'aqua'
+    backgroundColor: "aqua"
   }
 });
