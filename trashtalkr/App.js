@@ -37,7 +37,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://shielded-tor-77262.herokuapp.com/conversations/2')
+    fetch('https://shielded-tor-77262.herokuapp.com/conversations/4')
       .then( (res) => res.json())
       .then( (res) => {
         console.log(res)
