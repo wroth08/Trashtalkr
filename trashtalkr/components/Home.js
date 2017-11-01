@@ -9,21 +9,82 @@ class Home extends React.Component {
 
     render () {
         return (
-          <View style={{flexDirection: 'column', justifyContent: 'center', flex: 1, width: '95%'}}>
-            <View style={{justifyContent:'center', alignItems:'center', backgroundColor: 'blue', flex: 1, height: 110}}>
-              <Text style={{fontWeight: 'bold', color: '#F5F5F5'}}>Weekly Matchup</Text>
+          <View style={styles.container}>
+          <Text style={styles.title}>Welcome to Trashtalkr, Mr. Derutro</Text>
+            <View style={styles.viewone}>
+              <Text style={styles.textone}>Weekly Matchup</Text>
             </View>
-            <View style={{justifyContent:'center', alignItems:'center', backgroundColor: 'red', flex: 1, height: 110}}>
-              <Text style={{fontWeight: 'bold', color: 'yellow'}}>Chat</Text>
+            <View style={styles.viewtwo}>
+              <Text style={styles.texttwo}>Chat</Text>
             </View>
-            <View style={{justifyContent:'center', alignItems:'center', backgroundColor: 'green', flex: 1, height: 110}}>
-              <Text style={{fontWeight: 'bold', color: 'aqua'}}>NFL Game Scores</Text>
+            <View style={styles.viewthree}>
+              <Text style={styles.textthree}>NFL Game Scores</Text>
             </View>
-            <View style={{justifyContent:'center', alignItems:'center', backgroundColor: 'purple', flex: 1, height: 110}}>
-              <Text style={{fontWeight: 'bold', color: '#7FFF00'}}>Player Stats and Visualizations</Text>
+            <View style={styles.viewfour}>
+              <Text style={styles.textfour}>Player Stats and Visualizations</Text>
             </View>
           </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    flex: 1,
+    width: '90%'
+  },
+  viewone: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'blue',
+    flex: 1,
+    height: 120
+  },
+  viewtwo: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+    flex: 1,
+    height: 120
+  },
+  viewthree: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'green',
+    flex: 1,
+    height: 120
+  },
+  viewfour: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'purple',
+    flex: 1,
+    height: 120
+  },
+  textone: {
+    fontWeight: 'bold',
+    color: '#F5F5F5'
+  },
+  texttwo: {
+    fontWeight: 'bold',
+    color: 'yellow'
+  },
+  textthree: {
+    fontWeight: 'bold',
+    color: 'aqua'
+  },
+  textfour: {
+    fontWeight: 'bold',
+    color: '#7FFF00'
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 30,
+    alignSelf: 'center'
+  }
+});
+
 export default Home
