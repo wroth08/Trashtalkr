@@ -18,11 +18,12 @@ export default class App extends React.Component {
     this.login = this.login.bind(this);
     this.show = this.show.bind(this);
     this.signUpPage = this.signUpPage.bind(this);
+    this.changeViews = this.changeViews.bind(this);
     this.state = {
       messages: [],
       userData: { league_id: 0, team_id: 0 },
       tabs: {
-        page: "login"
+        page: "home"
       },
       data: {
         hometeam: [],
@@ -41,6 +42,14 @@ export default class App extends React.Component {
     } else if (index === 3) {
       this.setState({ tabs: { page: "players" } });
     }
+  }
+
+  changeViews(index) {
+    if (index === 0) {
+      this.setState({ tabs: { page: "boxscore" } });
+    } else if (index === 1) {
+      this.setState({ tabs: { page: "scores" } });
+    } 
   }
 
   signUpPage() {
@@ -134,7 +143,7 @@ export default class App extends React.Component {
             <Card>
               <View style={styles.container}>
                 <View style={styles.pad} />
-                <Chat messages={this.state.messages} />;
+                <Chat messages={this.state.messages} />
                 <View style={styles.pad} />
               </View>
             </Card>
@@ -165,7 +174,7 @@ export default class App extends React.Component {
           <ScrollView style={styles.homepage}>
             <View style={styles.homeCont}>
               <View style={styles.pad} />
-              <Home />
+              <Home changeViews={this.changeViews}/>
               <View style={styles.pad} />
             </View>
           </ScrollView>

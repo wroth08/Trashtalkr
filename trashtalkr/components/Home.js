@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-
+import { StyleSheet, Text, View, Image} from 'react-native'
+import Button from 'react-native-button'
 class Home extends React.Component {
 
   constructor() {
@@ -12,16 +12,14 @@ class Home extends React.Component {
           <View style={styles.container}>
           <Text style={styles.title}>Welcome to Trashtalkr, Mr. Derutro</Text>
             <View style={styles.viewone}>
-              <Text style={styles.textone}>Weekly Matchup</Text>
-            </View>
-            <View style={styles.viewtwo}>
-              <Text style={styles.texttwo}>Chat</Text>
+              <Button onPress={() => this.props.changeViews(0)}>
+                <Text style={styles.textone}>Weekly Matchup</Text>
+              </Button>
             </View>
             <View style={styles.viewthree}>
-              <Text style={styles.textthree}>NFL Game Scores</Text>
-            </View>
-            <View style={styles.viewfour}>
-              <Text style={styles.textfour}>Player Stats and Visualizations</Text>
+              <Button onPress={() => this.props.changeViews(1)}>
+                <Text style={styles.textthree}>NFL Game Scores</Text>
+              </Button>
             </View>
           </View>
         )
@@ -33,51 +31,30 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     flex: 1,
-    width: '90%'
+    width: '90%',
+    margin: 0
   },
   viewone: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'blue',
     flex: 1,
-    height: 120
-  },
-  viewtwo: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-    flex: 1,
-    height: 120
+    height: 165
   },
   viewthree: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'green',
     flex: 1,
-    height: 120
-  },
-  viewfour: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'purple',
-    flex: 1,
-    height: 120
+    height: 165
   },
   textone: {
     fontWeight: 'bold',
     color: '#F5F5F5'
   },
-  texttwo: {
-    fontWeight: 'bold',
-    color: 'yellow'
-  },
   textthree: {
     fontWeight: 'bold',
     color: 'aqua'
-  },
-  textfour: {
-    fontWeight: 'bold',
-    color: '#7FFF00'
   },
   title: {
     fontSize: 20,
