@@ -20,6 +20,7 @@ export default class App extends React.Component {
     this.login = this.login.bind(this);
     this.show = this.show.bind(this);
     this.signUpPage = this.signUpPage.bind(this);
+    this.changeViews = this.changeViews.bind(this);
     this.backToLogin = this.backToLogin.bind(this);
     this.signup = this.signup.bind(this);
     this.setScores = this.setScores.bind(this);
@@ -62,7 +63,7 @@ export default class App extends React.Component {
       matchups: [],
       userData: { league_id: 0, team_id: 0 },
       tabs: {
-        page: "login"
+        page: "home"
       },
       data: {
         hometeam: [],
@@ -84,7 +85,15 @@ export default class App extends React.Component {
     }
   }
 
-  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+  changeViews(index) {
+    if (index === 0) {
+      this.setState({ tabs: { page: "boxscore" } });
+    } else if (index === 1) {
+      this.setState({ tabs: { page: "scores" } });
+    } 
+  }
+
   signUpPage() {
     this.setState({ tabs: { page: "signup" } });
   }
@@ -199,6 +208,10 @@ export default class App extends React.Component {
   }
 
   setScores(data) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> bd0de9e24b9ee35aabce544d779537cc6c32065a
         let teamKeys = this.state.teamKeys
         let matchups = this.state.matchups
         data = data.boxscore
@@ -254,7 +267,7 @@ export default class App extends React.Component {
           <ScrollView style={styles.homepage}>
             <View style={styles.homeCont}>
               <View style={styles.pad} />
-              <Home />
+              <Home changeViews={this.changeViews}/>
               <View style={styles.pad} />
             </View>
           </ScrollView>
