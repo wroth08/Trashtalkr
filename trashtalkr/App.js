@@ -4,7 +4,7 @@ import { Card } from "react-native-material-design";
 
 import Chat from "./components/Chat";
 import BoxScore from "./components/BoxScore";
-import ChatModel from "./components/ChatModel";
+import ChatLog from "./components/ChatLog";
 import SignUp from "./components/SignUp";
 import MaterialNavTabs from "./components/MaterialNavTabs";
 import Home from "./components/Home";
@@ -82,7 +82,7 @@ export default class App extends React.Component {
     } else if (index === 2) {
       this.setState({ tabs: { page: "nfl" } });
     } else if (index === 3) {
-      this.setState({ tabs: { page: "playerstats" } });
+      this.setState({ tabs: { page: "chat" } });
     }
   }
 
@@ -209,12 +209,13 @@ export default class App extends React.Component {
               }
             });
             this.setState({ data: data });
-            this.setScores(res)
+            this.setScores(res);
           });
       });
   }
 
   setScores(data) {
+
         let teamKeys = this.state.teamKeys
         let matchups = this.state.matchups
         data = data.boxscore
@@ -234,15 +235,10 @@ export default class App extends React.Component {
       page = (
         <View>
           <ScrollView>
-            <View style={styles.chatButton} />
-            <ChatModel messages={this.state.messages} />
-            <Card>
-              <View style={styles.container}>
-                <View style={styles.pad} />
-                <Chat messages={this.state.messages} />
-                <View style={styles.pad} />
-              </View>
-            </Card>
+            <View style={styles.container}>
+              <View style={styles.pad} />
+              <ChatLog messages={this.state.messages} />
+            </View>
           </ScrollView>
           <MaterialNavTabs changeTabs={this.changeTabs} />
         </View>
@@ -252,7 +248,6 @@ export default class App extends React.Component {
         <View>
           <ScrollView>
             <View style={styles.chatButton} />
-            <ChatModel messages={this.state.messages} />
             <Card>
               <View style={styles.container}>
                 <View style={styles.pad} />
@@ -282,10 +277,11 @@ export default class App extends React.Component {
         <View>
           <ScrollView>
             <View style={styles.homeCont}>
-              <NflGameScores matchups={this.state.matchups}/>
+              <NflGameScores matchups={this.state.matchups} />
             </View>
           </ScrollView>
           <MaterialNavTabs changeTabs={this.changeTabs} />        
+
         </View>
       );
     } else if (this.state.tabs.page === "playerstats") {
@@ -298,7 +294,9 @@ export default class App extends React.Component {
               <View style={styles.pad} />
             </View>
           </ScrollView>
+
           <MaterialNavTabs changeTabs={this.changeTabs} />     
+
         </View>
       );
     } else if (this.state.tabs.page === "login") {
@@ -339,3 +337,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D6CF"
   }
 });
+
+{
+  /* <ScrollView>
+  <View style={styles.chatButton} />
+  <ChatModel messages={this.state.messages} />
+  <Card>
+    <View style={styles.container}>
+      <View style={styles.pad} />
+      <Chat messages={this.state.messages} />
+      <View style={styles.pad} />
+    </View>
+  </Card>
+</ScrollView> */
+}

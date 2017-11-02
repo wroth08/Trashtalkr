@@ -38,8 +38,8 @@ class MaterialNavTabs extends Component {
         />
         <Tab
           barBackgroundColor="#3E2723"
-          label="Player Stats"
-          icon={<Icon size={24} color="white" name="insert-chart" />}
+          label="Chat"
+          icon={<Icon size={24} color="white" name="message" />}
         />
       </BottomNavigation>
     );
