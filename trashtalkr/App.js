@@ -199,7 +199,6 @@ export default class App extends React.Component {
   }
 
   setScores(data) {
-<<<<<<< HEAD
         let teamKeys = this.state.teamKeys
         let matchups = this.state.matchups
         data = data.boxscore
@@ -212,26 +211,6 @@ export default class App extends React.Component {
           matchups.push(matchup)
         })
         this.setState({matchups: matchups})
-=======
-    let teamKeys = { ...this.state.teamKeys };
-    let matchups = [...this.state.matchups];
-    fetch(
-      `http://games.espn.com/ffl/api/v2/boxscore?leagueId=1608666&seasonId=2017&teamId=1&scoringPeriodId=7`
-    ).then(res => {
-      res = res.json().then(res => {
-        data = res.boxscore;
-        Object.keys(data.progames).map(game => {
-          let matchup = {};
-          matchup.homeScore = data.progames[game].homeScore;
-          matchup.awayScore = data.progames[game].awayScore;
-          matchup.homeProTeamId = teamKeys[data.progames[game].homeProTeamId];
-          matchup.awayProTeamId = teamKeys[data.progames[game].awayProTeamId];
-          matchups.push(matchup);
-        });
-        this.setState({ matchups: matchups });
-      });
-    });
->>>>>>> 159c2d9e3a2136ab28fdc348a18972bdd3446b18
   }
 
   render() {
@@ -289,6 +268,7 @@ export default class App extends React.Component {
               <NflGameScores matchups={this.state.matchups}/>
             </View>
           </ScrollView>
+          <MaterialNavTabs changeTabs={this.changeTabs} />        
         </View>
       );
     } else if (this.state.tabs.page === "playerstats") {
@@ -301,6 +281,7 @@ export default class App extends React.Component {
               <View style={styles.pad} />
             </View>
           </ScrollView>
+          <MaterialNavTabs changeTabs={this.changeTabs} />     
         </View>
       );
     } else if (this.state.tabs.page === "login") {
