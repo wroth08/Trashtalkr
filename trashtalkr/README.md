@@ -1,3 +1,6 @@
+![](/poop.png)
+
+
 # TODO:
 
 ## Signup page:

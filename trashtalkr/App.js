@@ -20,8 +20,9 @@ export default class App extends React.Component {
     this.login = this.login.bind(this);
     this.show = this.show.bind(this);
     this.signUpPage = this.signUpPage.bind(this);
-    this.signup = this.signup.bind(this)
-    this.setScores = this.setScores.bind(this)
+    this.backToLogin = this.backToLogin.bind(this);
+    this.signup = this.signup.bind(this);
+    this.setScores = this.setScores.bind(this);
     this.state = {
       teamKeys: {
         1: "Atlanta Falcons",
@@ -89,6 +90,11 @@ export default class App extends React.Component {
   }
 
   // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+  backToLogin() {
+    this.setState({ tabs: { page: "login" } });
+  }
+
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   login(username, password) {
     data = { username: username, password: password };
     fetch("https://shielded-tor-77262.herokuapp.com/users/login", {
@@ -112,7 +118,12 @@ export default class App extends React.Component {
   }
 
   signup(username, name, league_id, password) {
-    data = { username: username, password: password, name: name, league_id: league_id };
+    data = {
+      username: username,
+      password: password,
+      name: name,
+      league_id: league_id
+    };
     fetch("https://shielded-tor-77262.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
@@ -120,19 +131,21 @@ export default class App extends React.Component {
         "Content-Type": "application/json",
         Accept: "application/json"
       }
-    }).then( (res) => {
+    }).then(res => {
       if (res.status === 200) {
-      res = res.json().then( (res) => {
-        this.login(username, password)
-      })
-    } else if (res.status === 500) {
-      alert('No username in that league matches your input. Check your ESPN account to see if it is a username or your email.')
-    } else if (res.status === 404) {
-      alert('Unknown error.') }
-      else if (res.status === 501) {
-      alert('That user account already exists.')
-    }
-    })
+        res = res.json().then(res => {
+          this.login(username, password);
+        });
+      } else if (res.status === 500) {
+        alert(
+          "No username in that league matches your input. Check your ESPN account to see if it is a username or your email."
+        );
+      } else if (res.status === 404) {
+        alert("Unknown error.");
+      } else if (res.status === 501) {
+        alert("That user account already exists.");
+      }
+    });
   }
 
   show(league, team) {
@@ -186,6 +199,7 @@ export default class App extends React.Component {
   }
 
   setScores(data) {
+<<<<<<< HEAD
         let teamKeys = this.state.teamKeys
         let matchups = this.state.matchups
         data = data.boxscore
@@ -198,6 +212,26 @@ export default class App extends React.Component {
           matchups.push(matchup)
         })
         this.setState({matchups: matchups})
+=======
+    let teamKeys = { ...this.state.teamKeys };
+    let matchups = [...this.state.matchups];
+    fetch(
+      `http://games.espn.com/ffl/api/v2/boxscore?leagueId=1608666&seasonId=2017&teamId=1&scoringPeriodId=7`
+    ).then(res => {
+      res = res.json().then(res => {
+        data = res.boxscore;
+        Object.keys(data.progames).map(game => {
+          let matchup = {};
+          matchup.homeScore = data.progames[game].homeScore;
+          matchup.awayScore = data.progames[game].awayScore;
+          matchup.homeProTeamId = teamKeys[data.progames[game].homeProTeamId];
+          matchup.awayProTeamId = teamKeys[data.progames[game].awayProTeamId];
+          matchups.push(matchup);
+        });
+        this.setState({ matchups: matchups });
+      });
+    });
+>>>>>>> 159c2d9e3a2136ab28fdc348a18972bdd3446b18
   }
 
   render() {
@@ -210,7 +244,7 @@ export default class App extends React.Component {
             <Card>
               <View style={styles.container}>
                 <View style={styles.pad} />
-                <Chat messages={this.state.messages} />;
+                <Chat messages={this.state.messages} />
                 <View style={styles.pad} />
               </View>
             </Card>
@@ -270,9 +304,15 @@ export default class App extends React.Component {
         </View>
       );
     } else if (this.state.tabs.page === "login") {
-      page = <Login login={this.login} signUpPage={this.signUpPage} setScores={this.setScores} />;
+      page = (
+        <Login
+          login={this.login}
+          signUpPage={this.signUpPage}
+          setScores={this.setScores}
+        />
+      );
     } else if (this.state.tabs.page === "signup") {
-      page = <SignUp signup={this.signup}/>;
+      page = <SignUp signup={this.signup} backToLogin={this.backToLogin} />;
     }
 
     return <View>{page}</View>;

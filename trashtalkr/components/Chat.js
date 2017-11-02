@@ -1,29 +1,29 @@
-import React from 'react'
-import { StyleSheet, Text, FlatList, Image } from 'react-native'
+import React from "react";
+import { StyleSheet, Text, FlatList, Image } from "react-native";
 
-import Message from './Message'
+import Message from "./Message";
 
 class Chat extends React.Component {
-    render () {
-        return (
-            <FlatList
-            data={this.props.messages}
-            renderItem={({item}) => <Message key={item.string} message={item}></Message>}
-          />
-        )
-    }
+  render() {
+    return (
+      <FlatList
+        data={this.props.messages}
+        renderItem={({ item }) => <Message key={item.string} message={item} />}
+      />
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    contentContainer: {
-        flex: 1,
-        backgroundColor: 'aqua',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-end',
-        width: '100%',
-        padding: 20,
-        marginTop: 50,
-    }
-  })
+  contentContainer: {
+    flex: 1,
+    backgroundColor: "aqua",
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
+    width: "100%",
+    padding: 20,
+    marginTop: 50
+  }
+});
 
-export default Chat
+export default Chat;
