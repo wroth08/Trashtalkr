@@ -208,10 +208,6 @@ export default class App extends React.Component {
   }
 
   setScores(data) {
-<<<<<<< HEAD
-=======
-
->>>>>>> bd0de9e24b9ee35aabce544d779537cc6c32065a
         let teamKeys = this.state.teamKeys
         let matchups = this.state.matchups
         data = data.boxscore
