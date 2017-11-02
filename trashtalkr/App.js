@@ -141,7 +141,7 @@ export default class App extends React.Component {
             <Card>
               <View style={styles.container}>
                 <View style={styles.pad} />
-                <Chat messages={this.state.messages} />;
+                <Chat messages={this.state.messages} />
                 <View style={styles.pad} />
               </View>
             </Card>
