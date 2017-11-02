@@ -43,7 +43,6 @@ class Login extends React.Component {
 
   handleLogin = () => {
     const value = this._form.getValue();
-    console.log("value: ", value);
     this.props.login(value.username, value.password);
   };
 
