@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
     padding: 5,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    flex: 1,
+    minHeight: 700
   },
   header: {
     alignSelf: "center",

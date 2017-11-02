@@ -77,7 +77,8 @@ class BoxScore extends React.Component {
 const styles = StyleSheet.create({
   boxscore: {
     width: "100%",
-    height: "90%"
+    height: "90%",
+    minHeight: 700
   },
   myteam: {
     flex: 1,
