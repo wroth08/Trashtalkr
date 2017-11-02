@@ -18,7 +18,13 @@ class ChatLog extends React.Component {
           <View style={styles.image} />
           <View>
             <View>
-              <Text style={styles.header}>Player Stats</Text>
+              <Image
+                source={{
+                  uri:
+                    "https://cdn.dribbble.com/users/85713/screenshots/3091946/dribble.gif"
+                }}
+                style={{ width: 100, height: 135, marginLeft: 110 }}
+              />
             </View>
             <Card>
               <View>
