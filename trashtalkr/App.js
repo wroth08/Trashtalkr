@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import { Card } from "react-native-material-design";
-import ToolbarComponent from "react-native-toolbar-component";
 
 import Chat from "./components/Chat";
 import BoxScore from "./components/BoxScore";
@@ -9,8 +8,11 @@ import ChatModel from "./components/ChatModel";
 import SignUp from "./components/SignUp";
 import MaterialNavTabs from "./components/MaterialNavTabs";
 import Home from "./components/Home";
+import NflGameScores from "./components/NflGameScores";
+import PlayerStats from "./components/PlayerStats";
 import Login from "./components/Login";
 
+// _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 export default class App extends React.Component {
   constructor() {
     super();
@@ -22,7 +24,7 @@ export default class App extends React.Component {
       messages: [],
       userData: { league_id: 0, team_id: 0 },
       tabs: {
-        page: "login"
+        page: "nfl"
       },
       data: {
         hometeam: [],
@@ -31,22 +33,25 @@ export default class App extends React.Component {
     };
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   changeTabs(index) {
     if (index === 0) {
       this.setState({ tabs: { page: "home" } });
     } else if (index === 1) {
       this.setState({ tabs: { page: "boxscore" } });
     } else if (index === 2) {
-      this.setState({ tabs: { page: "scores" } });
+      this.setState({ tabs: { page: "nfl" } });
     } else if (index === 3) {
-      this.setState({ tabs: { page: "players" } });
+      this.setState({ tabs: { page: "playerstats" } });
     }
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   signUpPage() {
     this.setState({ tabs: { page: "signup" } });
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   login(username, password) {
     data = { username: username, password: password };
     fetch("https://shielded-tor-77262.herokuapp.com/users/login", {
@@ -69,6 +74,7 @@ export default class App extends React.Component {
     });
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   componentDidMount() {}
 
   show(league, team) {
@@ -124,6 +130,7 @@ export default class App extends React.Component {
       });
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   render() {
     if (this.state.tabs.page === "chat") {
       page = (
@@ -171,6 +178,28 @@ export default class App extends React.Component {
           </ScrollView>
         </View>
       );
+    } else if (this.state.tabs.page === "nfl") {
+      page = (
+        <View>
+          <ScrollView>
+            <View style={styles.homeCont}>
+              <NflGameScores />
+            </View>
+          </ScrollView>
+        </View>
+      );
+    } else if (this.state.tabs.page === "playerstats") {
+      page = (
+        <View>
+          <ScrollView style={styles.homepage}>
+            <View style={styles.homeCont}>
+              <View style={styles.pad} />
+              <PlayerStats />
+              <View style={styles.pad} />
+            </View>
+          </ScrollView>
+        </View>
+      );
     } else if (this.state.tabs.page === "login") {
       page = <Login login={this.login} signUpPage={this.signUpPage} />;
     } else if (this.state.tabs.page === "signup") {
@@ -181,6 +210,7 @@ export default class App extends React.Component {
   }
 }
 
+// _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
