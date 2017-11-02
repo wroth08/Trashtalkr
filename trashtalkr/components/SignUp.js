@@ -41,12 +41,16 @@ export default class SignUp extends Component {
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
     this.clearForm();
-    this.props.signup(value.Username, value.Name, value.League, value.Password)
+    this.props.signup(value.Username, value.Name, value.League, value.Password);
   };
 
   clearForm = () => {
     // clear content from all textbox
     this.setState({ value: null });
+  };
+
+  handleBackToLogin = () => {
+    this.props.backToLogin();
   };
 
   render() {
@@ -83,6 +87,14 @@ export default class SignUp extends Component {
           >
             <Text style={styles.buttonText}>Sign Up!</Text>
           </TouchableHighlight>
+
+          <TouchableHighlight
+            style={styles.button2}
+            onPress={this.handleBackToLogin}
+            underlayColor="#99d9f4"
+          >
+            <Text style={styles.buttonText}>Back to Login</Text>
+          </TouchableHighlight>
         </View>
       </ScrollView>
     );
@@ -110,6 +122,16 @@ var styles = StyleSheet.create({
     height: 36,
     backgroundColor: "#48BBEC",
     borderColor: "#48BBEC",
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: "stretch",
+    justifyContent: "center"
+  },
+  button2: {
+    height: 36,
+    backgroundColor: "#09C068",
+    borderColor: "#09C068",
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
