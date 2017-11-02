@@ -40,8 +40,8 @@ const options = {
 export default class SignUp extends Component {
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
-    console.log("value: ", value);
     this.clearForm();
+    this.props.signup(value.Username, value.Name, value.League, value.Password)
   };
 
   clearForm = () => {
