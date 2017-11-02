@@ -20,13 +20,11 @@ class BoxScore extends React.Component {
                  let score = current[0]['score']
                  return sum + score}
              }, 0).toFixed(1)
-         console.log(totalHome)
          let totalAway = activeAway.reduce( function (sum, current) {
              if (current[0]['score'] !== undefined) {
                  let score = current[0]['score']
                  return sum + score}
              }, 0).toFixed(1)
-        //  console.log(totalAway)
     return (
       <View className="boxscore" style={styles.boxscore}>
         <Text style={styles.titleText}>

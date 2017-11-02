@@ -1,3 +1,26 @@
+![](/poop.png)
+
+
+# TODO:
+
+## Signup page:
+[] Post new user data to the database
+[] Make api call to ESPN to grab new users team data
+[] Create button that will link back to the login page
+
+## Messages:
+[] Dynamically loads db messages (currently they are hard coded)
+[] Logic to check match up scores and send new message to the losing player
+
+
+## NFL Game Scores
+[] Make a NFL Game Scores page
+
+## Player Stats
+[] Make a players stats page
+
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).

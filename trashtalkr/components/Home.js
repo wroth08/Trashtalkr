@@ -1,11 +1,12 @@
+
 import React from 'react'
 import { StyleSheet, Text, View, Image} from 'react-native'
 import Button from 'react-native-button'
 class Home extends React.Component {
-
   constructor() {
-      super()
+    super();
   }
+
 
     render () {
         return (
@@ -24,44 +25,47 @@ class Home extends React.Component {
           </View>
         )
     }
+
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center",
     flex: 1,
+
     width: '90%',
     margin: 0
   },
   viewone: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'blue',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "blue",
     flex: 1,
     height: 165
   },
   viewthree: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'green',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "green",
     flex: 1,
     height: 165
   },
   textone: {
-    fontWeight: 'bold',
-    color: '#F5F5F5'
+    fontWeight: "bold",
+    color: "#F5F5F5"
   },
   textthree: {
-    fontWeight: 'bold',
-    color: 'aqua'
+    fontWeight: "bold",
+    color: "aqua"
   },
+
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     paddingBottom: 30,
-    alignSelf: 'center'
+    alignSelf: "center"
   }
 });
 
-export default Home
+export default Home;

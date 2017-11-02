@@ -6,7 +6,8 @@ import {
   TouchableHighlight,
   View,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  Image
 } from "react-native";
 
 class ChatModel extends React.Component {
@@ -33,7 +34,7 @@ class ChatModel extends React.Component {
             animationType="slide"
             transparent={false}
             visible={this.state.modalVisible}
-            onRequestClose={() => console.log('ok')}
+            onRequestClose={() => console.log("ok")}
           >
             <View
               style={{
@@ -72,7 +73,13 @@ class ChatModel extends React.Component {
                     {this.props.messages.map(message => (
                       <Text key={message.string} style={styles.messageBubble}>
                         {"\n"}
-                        {"  " + message.name + ": "}
+                        <Image
+                          source={{
+                            uri: "https://m.popkey.co/68b58b/z9mGe.gif"
+                          }}
+                          style={{ width: 70, height: 70 }}
+                        />
+                        {"" + message.name + ": "}
                         {message.string}
                       </Text>
                     ))}
@@ -120,11 +127,11 @@ const styles = StyleSheet.create({
   },
 
   messageBubble: {
-    marginTop: 10,
+    marginTop: 2,
     marginRight: 1,
     marginBottom: 1,
-    paddingLeft: 10,
-    paddingBottom: 10,
+    paddingLeft: 1,
+    paddingBottom: 2,
     color: "black",
     fontSize: 20,
     fontWeight: "bold"
