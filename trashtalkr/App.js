@@ -20,6 +20,7 @@ export default class App extends React.Component {
     this.login = this.login.bind(this);
     this.show = this.show.bind(this);
     this.signUpPage = this.signUpPage.bind(this);
+    this.changeViews = this.changeViews.bind(this);
     this.backToLogin = this.backToLogin.bind(this);
     this.signup = this.signup.bind(this);
     this.setScores = this.setScores.bind(this);
@@ -62,7 +63,7 @@ export default class App extends React.Component {
       matchups: [],
       userData: { league_id: 0, team_id: 0 },
       tabs: {
-        page: "login"
+        page: "home"
       },
       data: {
         hometeam: [],
@@ -84,7 +85,15 @@ export default class App extends React.Component {
     }
   }
 
-  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+  changeViews(index) {
+    if (index === 0) {
+      this.setState({ tabs: { page: "boxscore" } });
+    } else if (index === 1) {
+      this.setState({ tabs: { page: "scores" } });
+    } 
+  }
+
   signUpPage() {
     this.setState({ tabs: { page: "signup" } });
   }
@@ -199,7 +208,7 @@ export default class App extends React.Component {
   }
 
   setScores(data) {
-<<<<<<< HEAD
+
         let teamKeys = this.state.teamKeys
         let matchups = this.state.matchups
         data = data.boxscore
@@ -212,26 +221,7 @@ export default class App extends React.Component {
           matchups.push(matchup)
         })
         this.setState({matchups: matchups})
-=======
-    let teamKeys = { ...this.state.teamKeys };
-    let matchups = [...this.state.matchups];
-    fetch(
-      `http://games.espn.com/ffl/api/v2/boxscore?leagueId=1608666&seasonId=2017&teamId=1&scoringPeriodId=7`
-    ).then(res => {
-      res = res.json().then(res => {
-        data = res.boxscore;
-        Object.keys(data.progames).map(game => {
-          let matchup = {};
-          matchup.homeScore = data.progames[game].homeScore;
-          matchup.awayScore = data.progames[game].awayScore;
-          matchup.homeProTeamId = teamKeys[data.progames[game].homeProTeamId];
-          matchup.awayProTeamId = teamKeys[data.progames[game].awayProTeamId];
-          matchups.push(matchup);
-        });
-        this.setState({ matchups: matchups });
-      });
-    });
->>>>>>> 159c2d9e3a2136ab28fdc348a18972bdd3446b18
+
   }
 
   render() {
@@ -275,7 +265,7 @@ export default class App extends React.Component {
           <ScrollView style={styles.homepage}>
             <View style={styles.homeCont}>
               <View style={styles.pad} />
-              <Home />
+              <Home changeViews={this.changeViews}/>
               <View style={styles.pad} />
             </View>
           </ScrollView>
