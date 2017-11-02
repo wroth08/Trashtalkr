@@ -68,7 +68,6 @@ class Login extends React.Component {
         >
           <Text style={styles.buttonText}>Sign Up!</Text>
         </TouchableHighlight>
-        <Button title="score" onPress={this.props.setScores}/>
         <Image source={require("../poop.png")} style={styles.image} />
       </View>
     );

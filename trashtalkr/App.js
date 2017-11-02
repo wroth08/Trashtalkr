@@ -111,7 +111,6 @@ export default class App extends React.Component {
     });
   }
 
-<<<<<<< HEAD
   signup(username, name, league_id, password) {
     data = { username: username, password: password, name: name, league_id: league_id };
     fetch("https://shielded-tor-77262.herokuapp.com/users", {
@@ -135,10 +134,6 @@ export default class App extends React.Component {
     }
     })
   }
-=======
-  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-  componentDidMount() {}
->>>>>>> 77dcf1f10bfc710ab7999603589cb06900060a7d
 
   show(league, team) {
     fetch("https://shielded-tor-77262.herokuapp.com/conversations/2")
