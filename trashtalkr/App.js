@@ -23,7 +23,7 @@ export default class App extends React.Component {
     this.backToLogin = this.backToLogin.bind(this);
     this.signup = this.signup.bind(this);
     this.setScores = this.setScores.bind(this);
-    this.getNews = this.getNews.bind(this)
+    this.getNews = this.getNews.bind(this);
     this.state = {
       teamKeys: {
         1: "Atlanta Falcons",
@@ -86,18 +86,19 @@ export default class App extends React.Component {
     }
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   getNews() {
-    fetch('https://newsapi.org/v1/articles?source=nfl-news&sortBy=top&apiKey=6a09aad960c94e169599cbf62f12183a')
-    .then( (res) => {
-      res = res.json()
-      .then( (res) => {
-        let articles = [...this.state.articles]
-        res.articles.map( (article) => {
-          articles.push(article)
-        })
-        this.setState({articles: articles})
-      })
-    })
+    fetch(
+      "https://newsapi.org/v1/articles?source=nfl-news&sortBy=top&apiKey=6a09aad960c94e169599cbf62f12183a"
+    ).then(res => {
+      res = res.json().then(res => {
+        let articles = [...this.state.articles];
+        res.articles.map(article => {
+          articles.push(article);
+        });
+        this.setState({ articles: articles });
+      });
+    });
   }
 
   signUpPage() {
@@ -127,12 +128,13 @@ export default class App extends React.Component {
           });
           this.setState({ tabs: { page: "boxscore" } });
           this.show(this.state.userData.league_id, this.state.userData.team_id);
-          this.getNews()
+          this.getNews();
         });
       }
     });
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   signup(username, name, league_id, password) {
     data = {
       username: username,
@@ -164,6 +166,7 @@ export default class App extends React.Component {
     });
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   show(league, team) {
     fetch("https://shielded-tor-77262.herokuapp.com/conversations/2")
       .then(res => res.json())
@@ -214,22 +217,23 @@ export default class App extends React.Component {
       });
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   setScores(data) {
-
-        let teamKeys = this.state.teamKeys
-        let matchups = this.state.matchups
-        data = data.boxscore
-        Object.keys(data.progames).map( (game) => {
-          let matchup = {}
-          matchup.homeScore = data.progames[game].homeScore
-          matchup.awayScore= data.progames[game].awayScore
-          matchup.homeProTeamId = teamKeys[data.progames[game].homeProTeamId]
-          matchup.awayProTeamId = teamKeys[data.progames[game].awayProTeamId]
-          matchups.push(matchup)
-        })
-        this.setState({matchups: matchups})
+    let teamKeys = this.state.teamKeys;
+    let matchups = this.state.matchups;
+    data = data.boxscore;
+    Object.keys(data.progames).map(game => {
+      let matchup = {};
+      matchup.homeScore = data.progames[game].homeScore;
+      matchup.awayScore = data.progames[game].awayScore;
+      matchup.homeProTeamId = teamKeys[data.progames[game].homeProTeamId];
+      matchup.awayProTeamId = teamKeys[data.progames[game].awayProTeamId];
+      matchups.push(matchup);
+    });
+    this.setState({ matchups: matchups });
   }
 
+  // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
   render() {
     if (this.state.tabs.page === "chat") {
       page = (
@@ -265,11 +269,11 @@ export default class App extends React.Component {
           <ScrollView style={styles.homepage}>
             <View style={styles.homeCont}>
               <View style={styles.pad} />
-              <Home articles={this.state.articles}/>
+              <Home articles={this.state.articles} />
               <View style={styles.pad} />
             </View>
           </ScrollView>
-          <MaterialNavTabs changeTabs={this.changeTabs} />   
+          <MaterialNavTabs changeTabs={this.changeTabs} />
         </View>
       );
     } else if (this.state.tabs.page === "nfl") {
@@ -280,8 +284,7 @@ export default class App extends React.Component {
               <NflGameScores matchups={this.state.matchups} />
             </View>
           </ScrollView>
-          <MaterialNavTabs changeTabs={this.changeTabs} />        
-
+          <MaterialNavTabs changeTabs={this.changeTabs} />
         </View>
       );
     } else if (this.state.tabs.page === "playerstats") {
@@ -295,8 +298,7 @@ export default class App extends React.Component {
             </View>
           </ScrollView>
 
-          <MaterialNavTabs changeTabs={this.changeTabs} />     
-
+          <MaterialNavTabs changeTabs={this.changeTabs} />
         </View>
       );
     } else if (this.state.tabs.page === "login") {
