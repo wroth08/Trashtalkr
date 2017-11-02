@@ -32,7 +32,7 @@ const options = {
       error: "Choose something you use on a dozen other sites or something"
     },
     terms: {
-      label: "Agree to not get your feeling hurt"
+      label: "Agree to not get your feelings hurt"
     }
   }
 };
