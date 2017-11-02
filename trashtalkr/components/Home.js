@@ -1,7 +1,8 @@
 
 import React from 'react'
 import { StyleSheet, Text, View, Image} from 'react-native'
-import Button from 'react-native-button'
+import { Card } from "react-native-material-design";
+
 class Home extends React.Component {
   constructor() {
     super();
@@ -11,17 +12,18 @@ class Home extends React.Component {
     render () {
         return (
           <View style={styles.container}>
-          <Text style={styles.title}>Welcome to Trashtalkr, Mr. Derutro</Text>
-            <View style={styles.viewone}>
-              <Button onPress={() => this.props.changeViews(0)}>
-                <Text style={styles.textone}>Weekly Matchup</Text>
-              </Button>
-            </View>
-            <View style={styles.viewthree}>
-              <Button onPress={() => this.props.changeViews(1)}>
-                <Text style={styles.textthree}>NFL Game Scores</Text>
-              </Button>
-            </View>
+            {
+              this.props.articles.map( (article) => {
+                let img = article.urlToImage
+                return (
+                  <Card key={article.url} style={styles.article}>
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>{article.title}</Text>
+                    <Image style={{width: 200, height: 150, margin: 20}} source={{uri: img}}/>
+                    <Text>{article.description}</Text>
+                  </Card>
+                )
+              })
+            }
           </View>
         )
     }
@@ -33,38 +35,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     flex: 1,
-
     width: '90%',
-    margin: 0
+    margin: 0,
   },
-  viewone: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "blue",
-    flex: 1,
-    height: 165
-  },
-  viewthree: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "green",
-    flex: 1,
-    height: 165
-  },
-  textone: {
-    fontWeight: "bold",
-    color: "#F5F5F5"
-  },
-  textthree: {
-    fontWeight: "bold",
-    color: "aqua"
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    paddingBottom: 30,
-    alignSelf: "center"
+  article: {
+    justifyContent: 'center',
+    'alignItems': 'center',
+    padding: 10
   }
 });
 

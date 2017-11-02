@@ -20,10 +20,10 @@ export default class App extends React.Component {
     this.login = this.login.bind(this);
     this.show = this.show.bind(this);
     this.signUpPage = this.signUpPage.bind(this);
-    this.changeViews = this.changeViews.bind(this);
     this.backToLogin = this.backToLogin.bind(this);
     this.signup = this.signup.bind(this);
     this.setScores = this.setScores.bind(this);
+    this.getNews = this.getNews.bind(this)
     this.state = {
       teamKeys: {
         1: "Atlanta Falcons",
@@ -63,12 +63,13 @@ export default class App extends React.Component {
       matchups: [],
       userData: { league_id: 0, team_id: 0 },
       tabs: {
-        page: "home"
+        page: "login"
       },
       data: {
         hometeam: [],
         awayteam: []
-      }
+      },
+      articles: []
     };
   }
 
@@ -85,13 +86,18 @@ export default class App extends React.Component {
     }
   }
 
-
-  changeViews(index) {
-    if (index === 0) {
-      this.setState({ tabs: { page: "boxscore" } });
-    } else if (index === 1) {
-      this.setState({ tabs: { page: "scores" } });
-    } 
+  getNews() {
+    fetch('https://newsapi.org/v1/articles?source=nfl-news&sortBy=top&apiKey=6a09aad960c94e169599cbf62f12183a')
+    .then( (res) => {
+      res = res.json()
+      .then( (res) => {
+        let articles = [...this.state.articles]
+        res.articles.map( (article) => {
+          articles.push(article)
+        })
+        this.setState({articles: articles})
+      })
+    })
   }
 
   signUpPage() {
@@ -121,6 +127,7 @@ export default class App extends React.Component {
           });
           this.setState({ tabs: { page: "boxscore" } });
           this.show(this.state.userData.league_id, this.state.userData.team_id);
+          this.getNews()
         });
       }
     });
@@ -263,10 +270,11 @@ export default class App extends React.Component {
           <ScrollView style={styles.homepage}>
             <View style={styles.homeCont}>
               <View style={styles.pad} />
-              <Home changeViews={this.changeViews}/>
+              <Home articles={this.state.articles}/>
               <View style={styles.pad} />
             </View>
           </ScrollView>
+          <MaterialNavTabs changeTabs={this.changeTabs} />   
         </View>
       );
     } else if (this.state.tabs.page === "nfl") {
@@ -298,7 +306,7 @@ export default class App extends React.Component {
         <Login
           login={this.login}
           signUpPage={this.signUpPage}
-          setScores={this.setScores}
+          getNews={this.getNews}
         />
       );
     } else if (this.state.tabs.page === "signup") {
@@ -328,6 +336,6 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   homepage: {
-    backgroundColor: "aqua"
+    backgroundColor: "#D9D6CF"
   }
 });
