@@ -5,7 +5,8 @@ import {
   Button,
   Text,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from "react-native";
 
 import t from "tcomb-form-native"; // 0.6.9
@@ -13,22 +14,22 @@ import t from "tcomb-form-native"; // 0.6.9
 const Form = t.form.Form;
 
 const User = t.struct({
-  Email: t.String,
+  Username: t.String,
   Name: t.String,
   League: t.String,
-  password: t.String,
+  Password: t.String,
   terms: t.Boolean
 });
 
 const options = {
+  auto: "placeholders",
   fields: {
-    email: {
+    Username: {
       error:
-        "Without an email address how are you going to reset your password when you forget it?"
+        "Without a username, how do you expect to get your fantasy players?"
     },
     password: {
-      error:
-        "Choose something you use on a dozen other sites or something you won't remember"
+      error: "Choose something you use on a dozen other sites or something"
     },
     terms: {
       label: "Agree to not get your feeling hurt"
@@ -40,6 +41,12 @@ export default class SignUp extends Component {
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
     console.log("value: ", value);
+    this.clearForm();
+  };
+
+  clearForm = () => {
+    // clear content from all textbox
+    this.setState({ value: null });
   };
 
   render() {
@@ -47,6 +54,13 @@ export default class SignUp extends Component {
       <ScrollView>
         <View style={styles.container}>
           <View>
+            <Image
+              style={{ marginLeft: 90, width: 150, height: 50 }}
+              source={{
+                uri:
+                  "http://1000logos.net/wp-content/uploads/2017/01/ESPN-Logo.png"
+              }}
+            />
             <Text
               style={{
                 fontSize: 30,
@@ -54,16 +68,14 @@ export default class SignUp extends Component {
                 textAlign: "center"
               }}
             >
-              ESPN Information
+              Information
             </Text>
           </View>
-
           <Form
             ref={c => (this._form = c)} // assign a ref
             type={User}
             options={options}
           />
-
           <TouchableHighlight
             style={styles.button}
             onPress={this.handleSubmit}
@@ -105,11 +117,3 @@ var styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-// const styles = StyleSheet.create({
-//   container: {
-//     justifyContent: "center",
-//     marginTop: 50,
-//     padding: 20,
-//     backgroundColor: "#ffffff"
-//   }
-// });
