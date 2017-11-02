@@ -29,7 +29,7 @@ class ChatLog extends React.Component {
                       source={{
                         uri: "https://m.popkey.co/68b58b/z9mGe.gif"
                       }}
-                      style={{ width: 70, height: 70 }}
+                      style={{ width: 70, height: 70, marginTop: 20 }}
                     />
                     {"" + message.name + ": "}
                     {message.string}
@@ -51,12 +51,15 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "#ffffff"
   },
-  header: {
-    alignSelf: "center",
-    fontSize: 40,
-    fontWeight: "bold",
+  messageBubble: {
+    marginTop: 2,
+    marginRight: 1,
+    marginBottom: 5,
+    paddingLeft: 1,
+    paddingBottom: 2,
     color: "black",
-    marginBottom: "10%"
+    fontSize: 20,
+    fontWeight: "bold"
   },
   text: {
     fontSize: 15,
