@@ -20,30 +20,16 @@ class NflGameScores extends React.Component {
             <View>
               <Text style={styles.header}>NFL Scores</Text>
             </View>
-            <Card>
-              <Text style={styles.text}>
-                This is the body This is the body more more more more
-              </Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-              <Text style={styles.text}>This is the body This is the body</Text>
-            </Card>
+              {
+                this.props.matchups.map( (matchup) => {
+                  return (
+                    <Card key={matchup.homeProTeamId} style={styles.matchup}>
+                      <Text style={styles.text}>{matchup.homeProTeamId + ": " + matchup.homeScore}</Text>
+                      <Text style={styles.text}>{matchup.awayProTeamId + ": " + matchup.awayScore}</Text>
+                    </Card>
+                  )
+                })
+              }
           </View>
         </ScrollView>
       </View>
@@ -66,14 +52,21 @@ const styles = StyleSheet.create({
     marginBottom: "10%"
   },
   text: {
-    fontSize: 15,
+    fontSize: 20,
     paddingTop: 3,
     paddingBottom: 3,
-    color: "black"
+    color: "black",
   },
   image: {
     alignSelf: "center",
     marginBottom: "5%"
+  },
+  matchup: {
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 50,
+    paddingLeft: 50
   }
 });
 

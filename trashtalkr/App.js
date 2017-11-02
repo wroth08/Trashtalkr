@@ -61,7 +61,7 @@ export default class App extends React.Component {
       matchups: [],
       userData: { league_id: 0, team_id: 0 },
       tabs: {
-        page: "nfl"
+        page: "login"
       },
       data: {
         hometeam: [],
@@ -143,9 +143,6 @@ export default class App extends React.Component {
         this.setState({ messages: messages });
       })
       .then(() => {
-        console.log(
-          `http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`
-        );
         fetch(
           `http://games.espn.com/ffl/api/v2/boxscore?leagueId=${league}&seasonId=2017&teamId=${team}&scoringPeriodId=8`
         )
@@ -182,19 +179,16 @@ export default class App extends React.Component {
                 player[0].score = 0;
               }
             });
-            console.log(data["awayteam"]);
             this.setState({ data: data });
+            this.setScores(res)
           });
       });
   }
 
   setScores(data) {
-    let teamKeys = {...this.state.teamKeys}
-    let matchups = [...this.state.matchups]
-    fetch(`http://games.espn.com/ffl/api/v2/boxscore?leagueId=1608666&seasonId=2017&teamId=1&scoringPeriodId=7`)
-    .then( (res) => {
-      res = res.json().then( (res) => {
-        data = res.boxscore
+        let teamKeys = this.state.teamKeys
+        let matchups = this.state.matchups
+        data = data.boxscore
         Object.keys(data.progames).map( (game) => {
           let matchup = {}
           matchup.homeScore = data.progames[game].homeScore
@@ -204,8 +198,6 @@ export default class App extends React.Component {
           matchups.push(matchup)
         })
         this.setState({matchups: matchups})
-      })
-    })
   }
 
   render() {
@@ -260,7 +252,7 @@ export default class App extends React.Component {
         <View>
           <ScrollView>
             <View style={styles.homeCont}>
-              <NflGameScores />
+              <NflGameScores matchups={this.state.matchups}/>
             </View>
           </ScrollView>
         </View>
@@ -287,7 +279,6 @@ export default class App extends React.Component {
   }
 }
 
-// _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
