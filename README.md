@@ -5,8 +5,7 @@
 Trashtalkr is a react native app that uses the ESPN API to gather fantasy football league data. The app then uses that data to show your your weekly matchup, display your current team and player stats, as well as automatically talk trash to the opponent that is losing during that specific matchup.
 
 
-<img src="![](https://media.giphy.com/media/l4EpcazyPta1byn8Q/giphy.gif)
-" width=40%>
+<img src="https://media.giphy.com/media/l4EpcazyPta1byn8Q/giphy.gif" width=40%>
 
 
 Sign up with your ESPN credentials.

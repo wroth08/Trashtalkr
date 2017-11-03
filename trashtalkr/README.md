@@ -7,8 +7,7 @@ Trashtalkr is a react native app that uses the ESPN API to gather fantasy footba
 
 
 
-<img src="![](https://media.giphy.com/media/l4EpcazyPta1byn8Q/giphy.gif)
-" width=40%>
+<img src="https://media.giphy.com/media/l4EpcazyPta1byn8Q/giphy.gif" width=40%>
 
 
 
