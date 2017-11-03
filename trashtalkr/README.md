@@ -1,8 +1,10 @@
 # Trashtalkr
 ![](./poop.png)
 
-<img align="center" src="https://media.giphy.com/media/l4EpcazyPta1byn8Q/giphy.gif" >
+<p align="center"> <img  src="https://media.giphy.com/media/l4EpcazyPta1byn8Q/giphy.gif" ></p>
 
+<br>
+<br>
 <br>
 
 ##  What is it?
