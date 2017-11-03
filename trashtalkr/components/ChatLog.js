@@ -27,7 +27,7 @@ class ChatLog extends React.Component {
               />
             </View>
             <Card>
-              <View>
+              <View style={styles.card}>
                 {this.props.messages.map(message => (
                   <Text key={message.string} style={styles.messageBubble}>
                     {"\n"}
@@ -62,9 +62,8 @@ const styles = StyleSheet.create({
   messageBubble: {
     marginTop: 2,
     marginRight: 1,
-    marginBottom: 5,
     paddingLeft: 1,
-    paddingBottom: 2,
+    paddingBottom: 3,
     color: "black",
     fontSize: 20,
     fontWeight: "bold"

@@ -20,16 +20,18 @@ class NflGameScores extends React.Component {
             <View>
               <Text style={styles.header}>NFL Scores</Text>
             </View>
-              {
-                this.props.matchups.map( (matchup) => {
-                  return (
-                    <Card key={matchup.homeProTeamId} style={styles.matchup}>
-                      <Text style={styles.text}>{matchup.homeProTeamId + ": " + matchup.homeScore}</Text>
-                      <Text style={styles.text}>{matchup.awayProTeamId + ": " + matchup.awayScore}</Text>
-                    </Card>
-                  )
-                })
-              }
+            {this.props.matchups.map(matchup => {
+              return (
+                <Card key={matchup.homeProTeamId} style={styles.matchup}>
+                  <Text style={styles.text}>
+                    {matchup.homeProTeamId + ": " + matchup.homeScore}
+                  </Text>
+                  <Text style={styles.text}>
+                    {matchup.awayProTeamId + ": " + matchup.awayScore}
+                  </Text>
+                </Card>
+              );
+            })}
           </View>
         </ScrollView>
       </View>
@@ -41,6 +43,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     marginTop: 10,
+    marginBottom: 50,
     padding: 5,
     backgroundColor: "#ffffff"
   },
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 3,
     paddingBottom: 3,
-    color: "black",
+    color: "black"
   },
   image: {
     alignSelf: "center",

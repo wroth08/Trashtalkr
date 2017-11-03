@@ -7,7 +7,8 @@ import {
   View,
   TextInput,
   Button,
-  TouchableHighlight
+  TouchableHighlight,
+  secureTextEntry
 } from "react-native";
 import t from "tcomb-form-native"; // 0.6.9
 
@@ -18,28 +19,54 @@ const User = t.struct({
   password: t.String
 });
 
-const options = {
-  auto: "placeholders",
-  fields: {
-    Username: {
-      error: "Wrong username... 😔 "
+const formStyles = {
+  ...Form.stylesheet,
+
+  controlLabel: {
+    normal: {
+      fontSize: 18,
+      fontWeight: "600"
     },
-    password: {
-      error: "Wrong password... 😔 "
+    // the style applied when a validation error occours
+    error: {
+      color: "red",
+      fontSize: 18,
+      marginBottom: 7,
+      fontWeight: "600"
     }
   }
 };
 
-class Login extends React.Component {
-  constructor() {
-    super();
-    this.handleLogin = this.handleLogin.bind(this);
-    this.state = { username: "", password: "" };
-  }
+const options = {
+  auto: "placeholders",
+  fields: {
+    username: {
+      error: "Bet you typed it in wrong..."
+    },
+    password: {
+      password: {
+        password: true,
+        secureTextEntry: true
+      }
+    },
+    terms: {
+      label: "Agree to Terms"
+    }
+  },
+  stylesheet: formStyles
+};
 
-  // loginFunction() {
-  //   this.props.login(this.state.username, this.state.password);
-  // }
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.state = {
+      username: "",
+      password: "",
+      buttonState: true,
+      value: {}
+    };
+  }
 
   handleLogin = () => {
     const value = this._form.getValue();
@@ -48,6 +75,16 @@ class Login extends React.Component {
 
   handleSignUp = () => {
     this.props.signUpPage();
+  };
+
+  onChange = () => {
+    const value = this._form.getValue();
+    if (value) {
+      this.setState({
+        value,
+        buttonState: false
+      });
+    }
   };
 
   render() {
@@ -59,10 +96,13 @@ class Login extends React.Component {
           ref={c => (this._form = c)} // assign a ref
           type={User}
           options={options}
+          value={this.state.value}
+          onChange={this.onChange}
         />
         <TouchableHighlight
           style={styles.button}
           onPress={this.handleLogin}
+          disabled={this.state.buttonState}
           underlayColor="#99d9f4"
         >
           <Text style={styles.buttonText}>Login</Text>
@@ -89,16 +129,6 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#93CCEA"
   },
-  input1: {
-    width: "90%",
-    marginBottom: 20,
-    backgroundColor: "lightgrey"
-  },
-  input2: {
-    width: "90%",
-    backgroundColor: "lightgrey",
-    marginBottom: 20
-  },
   form: {
     backgroundColor: "white",
     width: "90%",
@@ -107,7 +137,6 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     margin: "5%",
     justifyContent: "center"
-    // alignItems: 'center'
   },
   header: {
     alignSelf: "center",

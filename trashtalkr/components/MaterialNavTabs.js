@@ -32,7 +32,7 @@ class MaterialNavTabs extends Component {
           icon={<Icon size={24} color="white" name="group" />}
         />
         <Tab
-          barBackgroundColor="#5D4037"
+          barBackgroundColor="#E40808"
           label="NFL"
           icon={<Icon size={24} color="white" name="featured-play-list" />}
         />

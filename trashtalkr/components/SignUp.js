@@ -21,36 +21,74 @@ const User = t.struct({
   terms: t.Boolean
 });
 
-const options = {
-  auto: "placeholders",
-  fields: {
-    Username: {
-      error:
-        "Without a username, how do you expect to get your fantasy players?"
+const formStyles = {
+  ...Form.stylesheet,
+
+  controlLabel: {
+    normal: {
+      fontSize: 18,
+      fontWeight: "600"
     },
-    password: {
-      error: "Choose something you use on a dozen other sites or something"
-    },
-    terms: {
-      label: "Agree to not get your feelings hurt"
+    // the style applied when a validation error occours
+    error: {
+      color: "red",
+      fontSize: 18,
+      marginBottom: 7,
+      fontWeight: "600"
     }
   }
 };
 
+const options = {
+  auto: "placeholders",
+  fields: {
+    username: {
+      error: ""
+    },
+    name: {
+      error: "You seriously dont know your password!?"
+    },
+    league: {
+      error: "Hmmm.. we weren't able to locate that league id "
+    },
+    password: {
+      type: "password",
+      placeholder: "Password",
+      error: "Password cannot be empty"
+    },
+    terms: {
+      label: "Agree to not get your feelings hurt"
+    }
+  },
+  stylesheet: formStyles
+};
+
 export default class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttonState: true,
+      value: {}
+    };
+  }
+
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
-    this.clearForm();
     this.props.signup(value.Username, value.Name, value.League, value.Password);
-  };
-
-  clearForm = () => {
-    // clear content from all textbox
-    this.setState({ value: null });
   };
 
   handleBackToLogin = () => {
     this.props.backToLogin();
+  };
+
+  onChange = () => {
+    const value = this._form.getValue();
+    if (value) {
+      this.setState({
+        value,
+        buttonState: false
+      });
+    }
   };
 
   render() {
@@ -79,10 +117,13 @@ export default class SignUp extends Component {
             ref={c => (this._form = c)} // assign a ref
             type={User}
             options={options}
+            value={this.state.value}
+            onChange={this.onChange}
           />
           <TouchableHighlight
             style={styles.button}
             onPress={this.handleSubmit}
+            disabled={this.state.buttonState}
             underlayColor="#99d9f4"
           >
             <Text style={styles.buttonText}>Sign Up!</Text>
