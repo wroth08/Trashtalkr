@@ -15,23 +15,38 @@ Trashtalkr is a react native app that uses the ESPN API to gather fantasy footba
 ### Sign up with your ESPN credentials.
 <p align="center">
     <img width=50% src="./2.png">
-  </a>
 </p>
- <!-- ![](./2.png) -->
+
 
 ### Login to your existing Trashtalkr account.
-![](./3.png)
-![](./4.png)
+
+<p align="center">
+    <img width=50% src="./3.png">
+    <img width=50% src="./4.png">
+</p>
 
 ### App will open to your current week matchup.
-![](./5.png)
-![](./6.png)
+
+<p align="center">
+    <img width=50% src="./5.png">
+    <img width=50% src="./6.png">
+</p>
 
 ### Home page is a news feed from "newsapi.org".
-![](./7.png)
+
+<p align="center">
+    <img width=50% src="./7.png">
+  </a>
+
 
 ### NFl page is weekly NFL team game scores.
-![](./8.png)
+
+<p align="center">
+    <img width=50% src="./8.png">
+</p>
 
 ### Trashtalkr page is where you can view your messages that Trashtalkr sent you.
-![](./9.png)
+
+<p align="center">
+    <img width=50% src="./9.png">
+</p>
